@@ -1,1 +1,1 @@
-**Project Name** : *'Mini Job Portal'*
+**Project Name** : *'Placement Mini-Portal'*

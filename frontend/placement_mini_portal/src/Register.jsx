@@ -5,13 +5,14 @@ function Register() {
   const [isStudent, setIsStudent] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     phone: "",
     password: "",
   });
 
   const toggleUserType = () => {
     setIsStudent(!isStudent);
-    setFormData({ name: "", phone: "", password: "" });
+    setFormData({ name: "", email: "", phone: "", password: "" });
   };
 
   const handleChange = (e) => {
@@ -20,7 +21,11 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(
+
+    console.log("User Type:", isStudent ? "Student" : "Company");
+    console.log("Form Data:", formData);
+
+    console.log(
       `${isStudent ? "Student" : "Company"} Registered!\n` +
         JSON.stringify(formData, null, 2)
     );
@@ -30,15 +35,16 @@ function Register() {
     <div className="register-container">
       <div className="register-card">
         <h2>{isStudent ? "Student Registration" : "Company Registration"}</h2>
+
         <div className="toggle">
           <button
-            onClick={toggleUserType}
+            onClick={() => setIsStudent(true)}
             className={isStudent ? "active" : ""}
           >
             Student
           </button>
           <button
-            onClick={toggleUserType}
+            onClick={() => setIsStudent(false)}
             className={!isStudent ? "active" : ""}
           >
             Company
@@ -53,6 +59,14 @@ function Register() {
                 name="name"
                 placeholder="Student Name"
                 value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Student Email"
+                value={formData.email}
                 onChange={handleChange}
                 required
               />
@@ -72,6 +86,14 @@ function Register() {
                 name="name"
                 placeholder="Company Name"
                 value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Company Email"
+                value={formData.email}
                 onChange={handleChange}
                 required
               />

@@ -97,9 +97,9 @@ The system will be simple, responsive, and demonstration-ready, effectively show
 
 ##  Contributors
 - **Shivansh Bhargava** – Developer & Project Lead  
-- **Sahil**
-- **Om Gupta**
-- **Devansh Saini**
+- **Sahil** - Frontend Developer (UI/UX)
+- **Om Gupta** - Backend Developer & Database Engineer
+- **Devansh Saini** - Testing & Documentation Engineer
 
 ---
 

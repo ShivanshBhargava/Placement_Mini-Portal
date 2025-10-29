@@ -1,63 +1,105 @@
-# 💡 Project Ideation Document  
-## 📘 Project Name: Placement_Mini_Portal  
+#  Project Ideation Document  
+##  Project Name: Placement_Mini_Portal  
 
 ---
 
-## 🧭 1. Project Overview  
-**Placement_Mini_Portal** is a web-based platform designed to simplify and digitalize the campus placement process. It allows students to register, build their profiles, browse company listings, and apply for job postings.  
-At the same time, companies can post job openings, track applications, and review applicants efficiently.  
+##  1. Project Overview  
+**Placement_Mini_Portal** is a simplified web application designed to streamline the campus placement process.  
+It enables students to register, create profiles, and apply for listed company jobs, while the placement cell (admin) can manage postings and track applications.  
 
-The system aims to bridge the communication gap between students and recruiters, making the placement process more transparent and organized.  
-
----
-
-## ❗ 2. Problem Statement  
-The current placement process in many colleges involves scattered spreadsheets, manual form submissions, and repeated communication between students, placement cells, and recruiters.  
-This results in:  
-- Inefficient tracking of applications  
-- Missing information or duplicate data  
-- Delayed updates on selection status  
-- Difficulty in matching students to suitable openings  
+The focus of this project is to build a **functional, easy-to-use, and minimal placement management system** within one month — covering the essential flow of registration, job listings, applications, and tracking.
 
 ---
 
-## 💡 3. Proposed Solution  
-A **centralized mini-portal** that automates registration, job postings, and application tracking for students and recruiters.  
-
-The platform will:  
-- Allow students to register and maintain an updatable profile.  
-- Display all available job opportunities in one place.  
-- Enable students to apply directly to jobs and track their application progress.  
-- Let placement admins or companies manage listings and view applicant statistics.  
+##  2. Objectives  
+- Provide students with a central platform to view and apply for placement opportunities.  
+- Enable admins to efficiently manage job postings and monitor applications.  
+- Maintain a clean UI with reliable data handling and user authentication.  
 
 ---
 
-## 🎯 4. Objectives  
-- Streamline the entire placement process through an easy-to-use web interface.  
-- Provide separate but connected interfaces for students and placement admins.  
-- Maintain transparent and real-time tracking of job applications.  
-- Store and manage student and company data efficiently using a robust backend.  
+##  3. Core Features  
+
+###  Student Side  
+- **Registration & Login**  
+  Secure signup and login system for students.  
+
+- **Profile Management**  
+  Students can update personal details like name, email, branch, CGPA, and resume link.  
+
+- **Job Listings**  
+  Display all active job openings with company name, role, stipend, and eligibility criteria.  
+
+- **Apply Button**  
+  Students can directly apply for jobs with a single click.  
+
+- **Application Status**  
+  Track progress through simple labels: `Applied`, `Shortlisted`, `Selected`.  
 
 ---
 
-## 👨‍🎓 5. Target Users  
-- **Students**: To register, maintain profiles, and apply for jobs.  
-- **Placement/Admin Team**: To post new jobs, monitor applications, and view analytics.  
-- **Companies/Recruiters**: To list openings and track interested candidates.  
+###  Admin / Placement Cell Side  
+- **Admin Login**  
+  Separate admin login for managing the system.  
+
+- **Company & Job Management**  
+  Add, edit, or remove job postings.  
+
+- **Application Tracking**  
+  View how many students applied for each job.  
+  Update each student’s application status manually if required.  
 
 ---
 
-## ⚙️ 6. Core Features  
+## ⚙️ 4. Backend Tasks  
+- Store and manage student profiles and login credentials.  
+- Store job postings linked to company details.  
+- Store student applications, linking each to a job and student record.  
+- Track and update the application status for each submission.  
 
-### 🧑‍💻 Frontend  
-- **Login & Registration** for students and admins.  
-- **Student Dashboard** showing applied jobs, application status, and profile info.  
-- **Company Listings** page with job cards showing company name, position, stipend, and eligibility.  
-- **Job Details Page** with full description and an **"Apply" button**.  
-- Responsive and user-friendly design for smooth navigation.  
+---
 
-### 🗄️ Backend  
-- Store and manage **student details**, profiles, and application history.  
-- Store **job postings** with linked company details and number of applicants.  
-- Maintain **application progress** (e.g., Applied → Shortlisted → Interview → Selected).  
-- APIs for registration, login, job listings, and application management.  
+##  5. Frontend Pages  
+
+| Page | Description |
+|------|--------------|
+| **Landing Page** | Intro page with navigation buttons for Login/Register. |
+| **Login / Register** | Forms for both student and admin accounts. |
+| **Student Dashboard** | Displays student profile, applied jobs, and job listings. |
+| **Job Details Page** | Detailed job view with role, company info, and “Apply” button. |
+| **Admin Dashboard** | Interface to add/view jobs and monitor applications. |
+
+> **Design Goal:** Keep UI minimal, responsive, and intuitive using **Chakra UI** or **Tailwind CSS** for faster development.
+
+---
+
+##  6. Tech Stack  
+
+| Layer | Technology |
+|-------|-------------|
+| **Frontend** | React.js / HTML / CSS / JavaScript |
+| **Backend** | Node.js + Express.js |
+| **Database** | MongoDB (with Mongoose ORM) |
+| **Authentication** | JWT or simple session-based login |
+| **Hosting** | Vercel (Frontend) + Render / Railway (Backend) |
+
+---
+
+##  8. Expected Outcome  
+By the end of the development cycle, **Placement_Mini_Portal** will be a functional web app where:  
+- Students can register, view, and apply for jobs.  
+- Admins can post jobs and view applicants.  
+- All data persists securely in a connected database.  
+
+The system will be simple, responsive, and demonstration-ready, effectively showcasing a digital placement workflow.
+
+---
+
+##  9. Contributor  
+- **Shivansh Bhargava** – Developer & Project Lead  
+
+---
+
+##  10. Summary  
+**Placement_Mini_Portal** is a compact yet complete web solution to manage student placements digitally.  
+It focuses on practicality, clean UI, and robust core functionalities — all achievable within one month of development.

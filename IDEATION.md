@@ -1,6 +1,6 @@
-# 🧠 Project Ideation Document  
+#  Project Ideation Document  
 
-## 1. Title & Team Members  
+## Title & Team Members  
 ### **Project Name:** Placement_Mini_Portal  
 ### **Team Members:**  
 - **Shivansh Bhargava** – Developer & Project Lead  
@@ -10,7 +10,7 @@
 
 ---
 
-## 2. Problem Statement  
+## 1. Problem Statement  
 The campus placement process is often **disorganized and time-consuming**, involving multiple communication channels like spreadsheets, emails, and offline updates.  
 Students struggle to track their applications and statuses, while placement cells manually manage job postings and applicant lists, leading to inefficiency and errors.  
 
@@ -18,7 +18,7 @@ There is a need for a **centralized, minimal, and easy-to-use digital platform**
 
 ---
 
-## 3. Proposed Solution  
+## 2. Proposed Solution  
 **Placement_Mini_Portal** aims to build a **lightweight web application** that brings all placement-related activities under one platform.  
 Students can **register, create profiles, and apply** for company listings, while the placement cell (admin) can **post jobs, manage listings, and track applications** efficiently.  
 
@@ -26,7 +26,7 @@ The portal focuses on a **clean, functional, and responsive interface**, ensurin
 
 ---
 
-## 4. Target Audience  
+## 3. Target Audience  
 - **Students:** Final or pre-final year students seeking placement opportunities.  
 - **Placement Cell / Admins:** College placement officers responsible for managing company drives and tracking applications.  
 
@@ -37,14 +37,14 @@ Their primary needs include:
 
 ---
 
-## 5. Market Research & Existing Alternatives  
+## 4. Market Research & Existing Alternatives  
 Existing college portals and large-scale recruitment platforms like **Handshake**, **TnP portals**, or **LinkedIn Jobs** provide similar functionalities, but they are either **too complex, expensive**, or **not customizable** for smaller institutions.  
 
 Our approach is **minimal and institution-focused**, providing only the core features necessary for a **small to mid-sized college environment**, ensuring quick deployment and ease of use.  
 
 ---
 
-## 6. Implementation Plan  
+## 5. Implementation Plan  
 
 ### **Frontend (React.js / Chakra UI)**  
 - Login and Registration pages for students and admins.  
@@ -71,7 +71,7 @@ Our approach is **minimal and institution-focused**, providing only the core fea
 
 ---
 
-## 7. Major Challenges & Risks  
+## 6. Major Challenges & Risks  
 | Challenge | Mitigation Strategy |
 |------------|----------------------|
 | Database schema design for linking students, jobs, and applications | Use Prisma ORM for clear relationships |
@@ -81,7 +81,7 @@ Our approach is **minimal and institution-focused**, providing only the core fea
 
 ---
 
-## 8. Expected Outcomes & Impact  
+## 7. Expected Outcomes & Impact  
 By project completion, **Placement_Mini_Portal** will:  
 - Provide a **working prototype** demonstrating the end-to-end placement workflow.  
 - Simplify placement communication between students and the placement cell.  
@@ -97,7 +97,7 @@ This system will act as a **scalable foundation** for future expansion into a fu
 
 ---
 
-## 9. Next Steps  
+## Next Steps  
 1. Finalize the tech stack and database schema.  
 2. Set up repository structure on GitHub (frontend + backend folders).  
 3. Begin implementing authentication and student dashboard features.  

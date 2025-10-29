@@ -1,0 +1,77 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f3f4f6;
+  font-family: Arial, sans-serif;
+}
+
+.register-card {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.toggle button {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  background: #ddd;
+  color: #333;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.toggle button.active {
+  background: #007bff;
+  color: white;
+}
+
+.toggle button:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+.toggle button:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.register-btn {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register-btn:hover {
+  background-color: #0056b3;
+}

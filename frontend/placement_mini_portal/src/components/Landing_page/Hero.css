@@ -1,7 +1,7 @@
 .blackbg {
     padding: 0;
     width: 100vw;
-    height: 80vh;
+    height: 85vh;
     background-color: black;
     box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.6);
     display: flex;
@@ -18,7 +18,7 @@
 .question{
     font-family: 'TAN Pearls', serif;
     color: #c1ff72;
-    margin-top: 9vh;
+    margin-top: 8vh;
     font-size:8vh;
 }
   

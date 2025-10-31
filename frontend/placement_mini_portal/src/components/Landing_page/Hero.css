@@ -8,23 +8,17 @@
     flex-direction: column; /* allows stacking Header + other hero content */
   }
   
-  .Header {
-    width: auto;
-    height: auto;
-    display: flex;                /* use flex */
-    justify-content: space-between; /*logo left, nav right */
-    align-items: center;          /* vertically centered */
-    padding: 2vh 2vw;             /* space around edges */
-    position: relative;          
-  }
+@font-face {
+    font-family: 'TAN Pearls';
+    src: url('../../assets/fonts/tan-pearl.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 
-  .Logo {
-    width: 6vw;
-    height: auto;
-    transition: transform 0.3s ease, filter 0.3s ease;
-  }
-  
-  .Logo:hover {
-    transform: scale(1.08);
-  }
+.question{
+    font-family: 'TAN Pearls', serif;
+    color: #c1ff72;
+    margin-top: 9vh;
+    font-size:8vh;
+}
   

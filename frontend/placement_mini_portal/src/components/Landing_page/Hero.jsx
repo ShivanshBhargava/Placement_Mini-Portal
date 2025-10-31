@@ -10,6 +10,7 @@ function Hero() {
   return (
     <div className="blackbg">
         <Header/>
+        <h1 className="question">Ready to level up your career?</h1>
     </div>
   );
 }

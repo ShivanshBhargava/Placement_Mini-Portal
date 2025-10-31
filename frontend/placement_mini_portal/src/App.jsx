@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import Register from './Register'
+// import Register from './components/Register.jsx'
+import Hero from './components/Landing_page/Hero';
 import './App.css'
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
   return (
     <>
       <div>
-        <Register/>
+        {/* <Register/> */}
+        <Hero/>
       </div>
     </>
   )

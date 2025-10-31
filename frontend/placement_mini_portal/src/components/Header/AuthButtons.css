@@ -1,0 +1,54 @@
+.auth-buttons{
+    display: flex;
+    width:14vw;
+    justify-content: space-evenly;
+}
+
+
+@font-face {
+    font-family: 'SK Concretia';
+    src: url('../../assets/fonts/sk-concretica-trial.ttf') format('truetype');
+  }
+
+  .signup-btn {
+    border: solid #C1FF72 2px;
+    background-color: black;
+    color: white;
+    width: 6vw;
+    height: 5vh;
+    font-size: 1rem;
+    font-family: 'SK Concretia', sans-serif;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .login-btn {
+    background-color: #C1FF72;
+    color: black;
+    width: 6vw;
+    height: 5vh;
+    font-size: 1rem;
+    font-family: 'SK Concretia', sans-serif;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* ✨ Hover effects */
+  .signup-btn:hover {
+    background-color: #C1FF72;
+    color: black;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(193, 255, 114, 0.6);
+  }
+  
+  .login-btn:hover {
+    background-color: black;
+    color: white;
+    border: solid #C1FF72 2px;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(193, 255, 114, 0.6);
+  }
+  

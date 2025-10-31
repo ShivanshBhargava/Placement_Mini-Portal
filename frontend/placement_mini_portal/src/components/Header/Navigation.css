@@ -1,0 +1,61 @@
+@font-face {
+    font-family: 'SK Concretia';
+    src: url('../../assets/fonts/sk-concretica-trial.ttf') format('truetype');
+  }
+
+.NavBar{
+    display: flex;
+    color: aliceblue;
+    width: 30vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    height: 5vh;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'SK Concretia', sans-serif;
+    border-radius: 13px;
+    /* Glass effect essentials */
+    background: rgba(255, 255, 255, 0.15); /* translucent “frosted” base */
+    backdrop-filter: blur(12px);           /* <- magic frosted blur */
+    -webkit-backdrop-filter: blur(12px);   /* for Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* light glass edge */
+    border-radius: 13px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);  /* soft depth shadow */
+
+}
+
+.NavBar:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.02);
+  }
+  
+  /* --- link styles --- */
+  .NavBar a {
+    color: aliceblue;
+    text-decoration: none;
+    font-size: 1rem;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  /* hover underline animation */
+  .NavBar a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: aliceblue;
+    transition: width 0.3s ease;
+  }
+  
+  .NavBar a:hover::after {
+    width: 100%;
+  }
+  
+  .NavBar a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+  }
+  

@@ -1,14 +1,4 @@
-.blackbg {
-    padding: 0;
-    width: 100vw;
-    height: 80vh;
-    background-color: black;
-    box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.6);
-    display: flex;
-    flex-direction: column; /* allows stacking Header + other hero content */
-  }
-  
-  .Header {
+.Header {
     width: auto;
     height: auto;
     display: flex;                /* use flex */
@@ -27,4 +17,3 @@
   .Logo:hover {
     transform: scale(1.08);
   }
-  

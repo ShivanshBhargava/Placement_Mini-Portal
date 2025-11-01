@@ -9,8 +9,9 @@
   }
 
   .Logo {
-    width: 6vw;
+    width: 5.9vw;
     height: auto;
+    background-color: black;
     transition: transform 0.3s ease, filter 0.3s ease;
   }
   

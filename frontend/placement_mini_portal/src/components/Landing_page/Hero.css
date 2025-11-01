@@ -1,9 +1,9 @@
 .blackbg {
     padding: 0;
     width: 100vw;
-    height: 85vh;
+    height: 100vh;
     background-color: black;
-    box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.6);
+    /* box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.6); */
     display: flex;
     flex-direction: column; /* allows stacking Header + other hero content */
   }
@@ -20,5 +20,11 @@
     color: #c1ff72;
     margin-top: 8vh;
     font-size:8vh;
+}
+
+.Laptop{
+    width:100%;
+    height:auto;
+    z-index: 2;
 }
   

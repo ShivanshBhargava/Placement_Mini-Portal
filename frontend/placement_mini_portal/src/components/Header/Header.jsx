@@ -13,7 +13,7 @@ function Header() {
   return (
         <div className="Header">
             
-            <div style={{width:"14vw", display:"flex", border:"solid black "}}>
+            <div style={{width:"14vw", display:"flex"}}>
             <motion.img src={logo}
             whileHover={{
               scale: 1.1,

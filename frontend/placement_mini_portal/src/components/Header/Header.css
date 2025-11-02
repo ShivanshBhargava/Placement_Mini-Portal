@@ -1,17 +1,15 @@
 .Header {
-    width: auto;
+    width: calc(97vw);
     height: auto;
     display: flex;                /* use flex */
     justify-content: space-between; /*logo left, nav right */
     align-items: center;          /* vertically centered */
     padding: 2vh 2vw;             /* space around edges */
-    position: relative;          
   }
 
   .Logo {
     width: 5.9vw;
     height: auto;
-    background-color: black;
     transition: transform 0.3s ease, filter 0.3s ease;
   }
   

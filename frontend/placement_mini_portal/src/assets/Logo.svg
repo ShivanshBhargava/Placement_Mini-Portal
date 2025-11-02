@@ -77,18 +77,7 @@
      id="layer-oc1">
     <g
        id="g14">
-      <path
-         d="M 0,0 H 1366 V 768 H 0 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         transform="translate(0,2.6666667e-5)"
-         clip-path="url(#clipPath1)"
-         id="path8" />
-      <path
-         d="M 0,0 H 1366 V 768 H 0 Z"
-         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         transform="translate(0,2.6666667e-5)"
-         clip-path="url(#clipPath2)"
-         id="path9" />
+
       <g
          clip-path="url(#clipPath7)"
          id="g13">

@@ -35,13 +35,13 @@
     cursor: pointer;
     transition: all 0.3s ease;
   }
-  
-  /* ✨ Hover effects */
+
+  /*Hover*/
   .signup-btn:hover {
     background-color: #C1FF72;
     color: black;
     transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(193, 255, 114, 0.6);
+    box-shadow: 0 0 30px rgba(193, 255, 114, 0.6);
   }
   
   .login-btn:hover {
@@ -49,6 +49,6 @@
     color: white;
     border: solid #C1FF72 2px;
     transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(193, 255, 114, 0.6);
+    box-shadow: 0 0 30px rgba(193, 255, 114, 0.6);
   }
   

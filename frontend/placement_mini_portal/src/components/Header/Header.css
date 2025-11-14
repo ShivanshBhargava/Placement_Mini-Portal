@@ -5,10 +5,11 @@
     justify-content: space-between; /*logo left, nav right */
     align-items: center;          /* vertically centered */
     padding: 2vh 2vw;             /* space around edges */
+    margin-top: 2vh;
   }
 
   .Logo {
-    width: 5.9vw;
+    width: 7vw;
     height: auto;
     transition: transform 0.3s ease, filter 0.3s ease;
   }

@@ -1,8 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans:300,400);
+
 .blackbg {
+    position: relative;
+    overflow: hidden;
     padding: 0;
     width: 100vw;
     height: 100vh;
-    background-color: black;
+    /* background: black; */
     /* box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.6); */
     display: flex;
     flex-direction: column; /* allows stacking Header + other hero content */
@@ -15,16 +19,64 @@
     font-style: normal;
 }
 
-.question{
-    font-family: 'TAN Pearls', serif;
-    color: #c1ff72;
-    margin-top: 8vh;
-    font-size:8vh;
-}
-
 .Laptop{
     width:100%;
     height:auto;
     z-index: 2;
 }
-  
+
+#section10 {
+    padding:4vw;
+  display: flex;
+  justify-content:right;
+  align-items: center;
+  z-index: 3;
+}
+.scroll-link {
+    z-index: 3;
+  display: grid;
+  grid-template-rows: auto auto;
+  align-items: center;
+  justify-items: center;
+  row-gap: 10px;
+
+  font: normal 1.2rem 'Josefin Sans', sans-serif;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.scroll-link:hover {
+  color: #888;
+}
+.scroll-link:hover .mouse {
+  border-color: #888;
+}
+
+.scroll-link:hover .mouse::before {
+  background-color: #888;
+}
+
+.mouse {
+  width: 30px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  position: relative; 
+  transition: border-color 0.3s ease;
+}
+
+.mouse::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  background-color: #fff;
+  border-radius: 100%;
+  transition: border-color 0.3s ease;
+}
+
+

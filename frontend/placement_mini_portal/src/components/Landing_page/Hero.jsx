@@ -4,7 +4,6 @@ import Header from "../Header/Header";
 import Laptop from '../../assets/Laptop.svg'
 import logo from '../../assets/Logo.svg'
 import { motion , useScroll, useTransform} from "framer-motion"
-import Threads from '../Background/Threads'
 
 
 
@@ -12,13 +11,6 @@ function Hero() {
 
   return (
     <div>
-      <div style={{ width: '100vw', height: '100vh', position: 'absolute' }}>
-        <Threads
-          amplitude={1}
-          distance={0}
-          enableMouseInteraction={true}
-        />
-      </div>
       <div className="blackbg">
 
        

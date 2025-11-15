@@ -1,82 +1,122 @@
-@import url(https://fonts.googleapis.com/css?family=Josefin+Sans:300,400);
-
-.blackbg {
-    position: relative;
-    overflow: hidden;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    /* background: black; */
-    /* box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.6); */
-    display: flex;
-    flex-direction: column; /* allows stacking Header + other hero content */
-  }
-  
-@font-face {
-    font-family: 'TAN Pearls';
-    src: url('../../assets/fonts/tan-pearl.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
+* {
+  cursor: url("data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='32'%20height='32'%3E%3Ccircle%20cx='3'%20cy='3'%20r='3'%20fill='%23ffffff'/%3E%3C/svg%3E") 3 3, auto;
 }
 
-.Laptop{
-    width:100%;
-    height:auto;
-    z-index: 2;
+/* GRID LAYOUT THAT MATCHES YOUR ORIGINAL SCREEN */
+.hero-grid {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  margin:auto;
+  grid-template-rows: 12vh 1fr 15vh; 
+  grid-template-columns: 100%;
+  grid-template-areas:
+    "header"
+    "center"
+    "scroll"
+    "dottedline";
+  position: relative;
+}
+
+.hero-header {
+  grid-area: header;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+
+.hero-center {
+  grid-area: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.hero-logo {
+  position: absolute;
+  width: 50vw;
+  height: auto;
+  z-index: 1;             
+}
+
+
+.hero-laptop {
+  position: absolute;
+  width: 100vw;            
+  height: auto;
+  z-index: 2;             
+  margin-top: 26vh;         
+}
+
+
+.hero-scroll {
+  grid-area: scroll;
+  display: flex;
+  justify-content: flex-end;
+  /* align-items:flex-start; */
+  /* padding-top: 6vh; */
+  /* padding-right: 3vw; */
+  width: 100%;
+  height: 100%;
+  z-index: 5;
 }
 
 #section10 {
-    padding:4vw;
+  padding:4vw;
   display: flex;
   justify-content:right;
   align-items: center;
   z-index: 3;
 }
+
 .scroll-link {
-    z-index: 3;
+  z-index: 3;
   display: grid;
   grid-template-rows: auto auto;
   align-items: center;
   justify-items: center;
-  row-gap: 10px;
-
-  font: normal 1.2rem 'Josefin Sans', sans-serif;
+  row-gap: 0.2vw;
+  font: normal 1.2vw 'Josefin Sans', sans-serif;
   text-decoration: none;
   color: white;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease; 
 }
 .scroll-link:hover {
   color: #888;
+  transform: translateY(-0.8vh);
 }
 .scroll-link:hover .mouse {
+  transform: translateY(-0.8vh);
   border-color: #888;
 }
-
 .scroll-link:hover .mouse::before {
   background-color: #888;
 }
-
 .mouse {
-  width: 30px;
-  height: 50px;
-  border: 2px solid #fff;
-  border-radius: 50px;
-  position: relative; 
-  transition: border-color 0.3s ease;
+  width: 2.01vw;
+  height: 3.35vw;
+  border: 0.134vw solid #fff;
+  border-radius: 3.35vw;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
 .mouse::before {
   content: '';
   position: absolute;
-  top: 10px;
+  top: 0.67vw;
   left: 50%;
-  width: 6px;
-  height: 6px;
-  margin-left: -3px;
+  width: 0.4vw;
+  height: 0.4vw;
+  margin-left: -0.2vw;
   background-color: #fff;
   border-radius: 100%;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 

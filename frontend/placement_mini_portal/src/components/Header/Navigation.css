@@ -34,7 +34,7 @@
   .NavBar a {
     color: aliceblue;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.1vw;
     position: relative;
     transition: color 0.3s ease;
   }

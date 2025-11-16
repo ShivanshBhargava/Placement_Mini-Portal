@@ -2,6 +2,11 @@
   cursor: url("data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='32'%20height='32'%3E%3Ccircle%20cx='3'%20cy='3'%20r='3'%20fill='%23ffffff'/%3E%3C/svg%3E") 3 3, auto;
 }
 
+.blackbg {
+  min-height: 98vh;
+  height: auto;
+}
+
 /* GRID LAYOUT THAT MATCHES YOUR ORIGINAL SCREEN */
 .hero-grid {
   display: grid;
@@ -49,7 +54,7 @@
   width: 100vw;            
   height: auto;
   z-index: 2;             
-  margin-top: 26vh;         
+  margin-top: 24vh;         
 }
 
 
@@ -120,3 +125,11 @@
 }
 
 
+.blue-line {
+  width: 120%;
+  height: 3.5vh;
+  background-color: rgba(0, 255, 255, 0.2);
+
+  transform: rotate(1deg);
+  transform-origin:right;
+}

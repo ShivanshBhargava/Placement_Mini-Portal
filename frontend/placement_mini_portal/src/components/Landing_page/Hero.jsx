@@ -5,13 +5,14 @@ import Laptop from "../../assets/Laptop.svg";
 import logo from "../../assets/Logo.svg";
 import { motion } from "framer-motion";
 import LightRays from "../Background/LightRays.jsx";
-import Drag from "../Pointer/FollowPointer.jsx";
-import GooCursor from "../Pointer/GooCursor.jsx";
+import GooCursor from "../Cursor/GooCursor.jsx";
+import TextonLanding from "./Text.jsx";
+import FlipText from "./Rotating.jsx";
+
 
 function Hero() {
   return (
     <div className="blackbg">
-      {/* <Drag/> */}
       <GooCursor style={{height:"0px"}}/>
       <motion.div
        initial={{
@@ -95,6 +96,130 @@ function Hero() {
               bounce: 0.3,
             }}
           />
+          <TextonLanding/>
+          <motion.div
+            style={{
+              position: "absolute",
+              right: "23vw",
+              marginTop: "15vh",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              gap: "1.5vh",
+              zIndex: 3,
+              textShadow: "0.3vw 0.3vw 0.8vw rgba(0, 0, 0, 0.7)",
+              whiteSpace: "nowrap",  // prevents wrapping
+            }}
+            initial={{ opacity: 0, x: "0vw", filter: "blur(12px)" }}
+            animate={{ opacity: 1, x: "19vw", filter: "blur(0px)" }}
+            transition={{ delay: 1.5, duration: 1, ease: "easeOut" }}
+          >
+            {/* ITEM 1 */}
+            <div style={{ textAlign:"right" }}>
+              <h1
+                style={{
+                  color: "#beb7b7ff",
+                  fontFamily: "Anton",
+                  fontSize: "2.2vw",
+                  margin:"0"
+                }}
+              >
+                01
+              </h1>
+              <FlipText
+                text="Simple"
+                style={{
+                  color: "#fcffe8ff",
+                  fontSize: "1.8vw",
+                  fontFamily: "Roboto, sans-serif",
+                  marginLeft: "3vw",
+                }}
+              />
+            </div>
+
+            {/* ITEM 2 */}
+            <div style={{ textAlign:"right" }}>
+              <h1
+                style={{
+                  color: "#beb7b7ff",
+                  fontFamily: "Anton",
+                  fontSize: "2.2vw",
+                  margin: 0,
+                }}
+              >
+                02
+              </h1>
+              <FlipText
+                text="Transparent"
+                style={{
+                  color: "#fcffe8ff",
+                  fontSize: "1.8vw",
+                  fontFamily: "Roboto, sans-serif",
+                  marginLeft: "3vw",
+                }}
+              />
+            </div>
+
+            {/* ITEM 3 */}
+            <div style={{ textAlign:"right" }}>
+              <h1
+                style={{
+                  color: "#beb7b7ff",
+                  fontFamily: "Anton",
+                  fontSize: "2.2vw",
+                  margin: 0,
+                }}
+              >
+                03
+              </h1>
+              <FlipText
+                text="Powerful"
+                style={{
+                  color: "#fcffe8ff",
+                  fontSize: "1.8vw",
+                  fontFamily: "Roboto, sans-serif",
+                  marginLeft: "3vw",
+                }}
+              />
+            </div>
+
+            {/* ITEM 4 */}
+            <div style={{ textAlign:"right" }}>
+              <h1
+                style={{
+                  color: "#beb7b7ff",
+                  fontFamily: "Anton",
+                  fontSize: "2.2vw",
+                  margin: 0,
+                }}
+              >
+                04
+              </h1>
+              <FlipText
+                text="Reliable"
+                style={{
+                  color: "#fcffe8ff",
+                  fontSize: "1.8vw",
+                  fontFamily: "Roboto, sans-serif",
+                  marginLeft: "3vw",
+                }}
+              />
+            </div>
+
+            {/* FINAL SINGLE-LINE TAGLINE */}
+            <h1
+              style={{
+                color: "#fcffe8ff",
+                fontFamily: "Yellowtail",
+                fontSize: "2vw",
+                marginTop: "3vh",
+                whiteSpace: "nowrap", // ensures single line
+                textAlign: "right",
+              }}
+            >
+              Because Your Future deserves nothing better
+            </h1>
+          </motion.div>
 
         </div>
 
@@ -117,8 +242,28 @@ function Hero() {
               <span className="scroll-text">Scroll</span>
             </a>
           </section>
-        </motion.div>      
+        </motion.div>    
+        
+      
       </div>
+      <motion.div
+        className="blue-line"
+        initial={{ opacity: 0, y: 50, scale: 0.9, rotate: 0 }}
+        animate={{ opacity: 1, y: 0, scale: 1, rotate: 1 }}
+        transition={{
+          delay: 1.7,
+          duration: 1.7,
+          ease: "easeOut",
+          type: "spring",
+          bounce: 0.3,
+        }}
+        style={{
+          width: "120%",
+          height: "3.5vh",
+          backgroundColor: "rgba(0, 255, 255, 0.2)",
+          transformOrigin: "right"
+        }}
+      />
     </div>
 
   );

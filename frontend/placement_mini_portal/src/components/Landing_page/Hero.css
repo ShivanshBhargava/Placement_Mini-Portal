@@ -4,7 +4,8 @@
 
 .blackbg {
   min-height: 98vh;
-  height: auto;
+  width: 100vw;
+  background-color: black;
 }
 
 /* GRID LAYOUT THAT MATCHES YOUR ORIGINAL SCREEN */

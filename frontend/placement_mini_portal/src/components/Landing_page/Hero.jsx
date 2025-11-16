@@ -11,6 +11,9 @@ import FlipText from "./Rotating.jsx";
 
 
 function Hero() {
+
+  
+
   return (
     <div className="blackbg">
       <GooCursor style={{height:"0px"}}/>
@@ -259,7 +262,7 @@ function Hero() {
         }}
         style={{
           width: "120%",
-          height: "3.5vh",
+          height: "4.5vh",
           backgroundColor: "rgba(0, 255, 255, 0.2)",
           transformOrigin: "right"
         }}

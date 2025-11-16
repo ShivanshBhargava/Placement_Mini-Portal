@@ -1,8 +1,15 @@
 /* Reset & Base Styles */
 
+.login-page{
+    background-color: rgb(36, 36, 36);
+    z-index:-2;
+    width:100vw;
+    height:100vh;
+}
+
 .bg {
     position:absolute;
-    width:85vw;
+    width:90vw;
     height:100vh;
     background-image: url("../../assets/Loginbg.jpg");
     background-repeat: no-repeat;
@@ -21,6 +28,7 @@
     align-items: center;
     justify-content: center;
     width:100vw;
+    font-family: "Lato", sans-serif;
 }
 
 /* Hero Section */
@@ -28,13 +36,15 @@
     text-align: center;
     margin-bottom: 4rem;
     animation: fadeIn 0.8s ease-in;
+    font-family:"Roboto", sans-serif;
 }
 
 .hero-title {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+    font-family:"Roboto", sans-serif;
+    background: linear-gradient(135deg, #000000 0%, #C1FF72 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -44,6 +54,7 @@
     font-size: 1.25rem;
     color: #64748b;
     margin-bottom: 2rem;
+    font-family:"Roboto", sans-serif;
 }
 
 .hero-buttons {
@@ -181,8 +192,8 @@
 
 .form-group input:focus {
     outline: none;
-    border-color: #3b82f6;
-    background: white;
+    border-color: #C1FF72;
+    background: #C1FF72;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
@@ -235,8 +246,8 @@
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
-    color: white;
+    background: #C1FF72;
+    color: black;
     box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
 }
 
@@ -246,12 +257,12 @@
 }
 
 .btn-secondary {
-    background: #f1f5f9;
+    background: #C1FF72;
     color: #1e293b;
 }
 
 .btn-secondary:hover {
-    background: #e2e8f0;
+    background: #C1FF72;
 }
 
 .btn-full {

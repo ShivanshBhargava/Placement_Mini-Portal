@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Signup - Placement Portal</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="signup-role.html" class="back-button">← Back</a>
+                <h1>Company Registration</h1>
+                <p>Register your company</p>
+            </div>
+
+            <form id="companySignupForm" class="auth-form">
+                <div class="form-group">
+                    <label for="companyName">Company Name</label>
+                    <input type="text" id="companyName" name="companyName" placeholder="Acme Corporation" required>
+                    <span class="error-message" id="companyNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="hrName">HR Name</label>
+                    <input type="text" id="hrName" name="hrName" placeholder="Jane Smith" required>
+                    <span class="error-message" id="hrNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="hr@company.com" required>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Contact Number</label>
+                    <input type="tel" id="contact" name="contact" placeholder="+91 1234567890" required>
+                    <span class="error-message" id="contactError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="website">Company Website (Optional)</label>
+                    <input type="url" id="website" name="website" placeholder="https://www.company.com">
+                    <span class="error-message" id="websiteError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-input">
+                        <input type="password" id="password" name="password" placeholder="Min. 8 characters" required>
+                        <button type="button" class="toggle-password">
+                        </button>
+                    </div>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="password-input">
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password" required>
+                        <button type="button" class="toggle-password" >
+                        </button>
+                    </div>
+                    <span class="error-message" id="confirmPasswordError"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">
+                    <span class="btn-text">Create Account</span>
+                    <span class="spinner" style="display: none;"></span>
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

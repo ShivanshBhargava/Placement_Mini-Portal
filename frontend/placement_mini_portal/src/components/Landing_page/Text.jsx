@@ -54,8 +54,8 @@ export default function TextonLanding() {
         }}
       >
         <strong>LeapIn</strong> is your personal gateway to internships,
-        full-time roles, and exciting career paths. 
-        Explore curated opportunities, apply effortlessly, and follow your journey—all through a single, seamless platform.
+        full time roles, and exciting career paths. 
+        Explore curated opportunities, apply effortlessly, and follow your journey all through a single platform.
       </p>
     </motion.div>
   );

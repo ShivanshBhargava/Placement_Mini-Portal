@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./login.css";
 import GooCursor from "../Cursor/GooCursor";
+import Signup from "../Signup/Signup";
 
 export default function Login() {
   const [emailError, setEmailError] = useState("");
@@ -73,7 +74,7 @@ export default function Login() {
 
             <div className="auth-footer">
               <p>
-                Don't have an account? <a href="/signup-role">Sign up</a>
+                Don't have an account? <a href="/signup">Sign up</a>
               </p>
             </div>
           </div>

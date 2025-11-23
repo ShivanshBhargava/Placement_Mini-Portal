@@ -1,5 +1,5 @@
 import { useState } from 'react'
-// import Register from './components/Register.jsx'
+import { Link } from "react-router-dom";
 import Hero from './components/Landing_page/Hero';
 import Login from './components/Login/login';
 import { Routes, Route } from "react-router-dom"

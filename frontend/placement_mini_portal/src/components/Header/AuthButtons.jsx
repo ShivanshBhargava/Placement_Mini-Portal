@@ -7,8 +7,8 @@ function AuthButtons() {
   const navigate = useNavigate();
   return (
     <div className="auth-buttons">
-      <button className="signup-btn" onClick={() => window.open("/signup")}>Sign Up</button>
-      <button className="login-btn" onClick={() => window.open("/login")}>Login</button>
+      <button className="signup-btn" onClick={() => navigate("/Signup")}>Sign Up</button>
+      <button className="login-btn" onClick={() => navigate("/Login")}>Login</button>
     </div>
   );
 }

@@ -8,12 +8,11 @@ import LightRays from "../Background/LightRays.jsx";
 import GooCursor from "../Cursor/GooCursor.jsx";
 import TextonLanding from "./Text.jsx";
 import FlipText from "./Rotating.jsx";
+import { useState, useEffect, useRef } from "react";
 
 
 function Hero() {
-
   
-
   return (
     <div className="blackbg">
       <GooCursor style={{height:"0px"}}/>
@@ -70,7 +69,7 @@ function Hero() {
         <div className="hero-center">
 
           {/* LOGO */}
-          <motion.img
+        <motion.img
             className="hero-logo"
             src={logo}
             initial={{ clipPath: "inset(0 100% 0 0)" }}

@@ -8,8 +8,35 @@ export default function Signup() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    try {
+      const response = await fetch("http://localhost:5001/Signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role, name, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setNameError(data.error || "Signup failed");
+        return;
+      }
+
+      alert("Signup successful!");
+      window.location.href = "/login";
+
+    } catch (error) {
+      console.error(error);
+      setEmailError("Something went wrong");
+    }
   };
 
   return (
@@ -61,14 +88,14 @@ export default function Signup() {
                 {/* Name */}
                 <div className="form-group2">
                   <label htmlFor="name">Full Name</label>
-                  <input type="text" id="name" placeholder="John Doe" required />
+                  <input type="text" name="name" id="name" placeholder="John Doe" required />
                   <span className="error-message2">{nameError}</span>
                 </div>
 
                 {/* Email */}
                 <div className="form-group2">
                   <label htmlFor="email">Email</label>
-                  <input type="email" id="email" placeholder="your@email.com" required />
+                  <input type="email" name="email" id="email" placeholder="your@email.com" required />
                   <span className="error-message2">{emailError}</span>
                 </div>
 
@@ -76,7 +103,7 @@ export default function Signup() {
                 <div className="form-group2">
                   <label htmlFor="password">Password</label>
                   <div className="password-input2">
-                    <input type="password" id="password" placeholder="Create a password" required />
+                    <input type="password" name="password" id="password" placeholder="Create a password" required />
                   </div>
                   <span className="error-message2">{passwordError}</span>
                 </div>

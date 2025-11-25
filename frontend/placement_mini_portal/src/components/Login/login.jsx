@@ -7,9 +7,39 @@ export default function Login() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  };
+
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    try {
+      const response = await fetch("http://localhost:5001/Login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      console.log(response)
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setEmailError(data.error || "Login failed");
+        return;
+      }
+
+      // save token in localStorage
+      localStorage.setItem("token", data.token);
+
+      // redirect user after login
+      window.location.href = "/dashboard"; 
+    } catch (error) {
+      console.error(error);
+      setEmailError("Something went wrong");
+    }
+};
+
 
   return (
     <div className="login-page">
@@ -54,7 +84,7 @@ export default function Login() {
               {/* Email */}
               <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" placeholder="your@email.com" required />
+                <input type="email" id="email" name="email" placeholder="your@email.com" required />
                 <span className="error-message">{emailError}</span>
               </div>
 
@@ -62,7 +92,7 @@ export default function Login() {
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <div className="password-input">
-                  <input type="password" id="password" placeholder="Enter your password" required />
+                  <input type="password" id="password" name="password" placeholder="Enter your password" required />
                 </div>
                 <span className="error-message">{passwordError}</span>
               </div>

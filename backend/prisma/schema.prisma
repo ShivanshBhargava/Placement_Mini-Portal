@@ -1,12 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -15,60 +8,59 @@ datasource db {
 }
 
 model Student {
-  id            Int           @id @default(autoincrement())
-  name          String
-  email         String        @unique
-  password      String
-  branch        String?
-  year          Int?          //current year of studies
-  cgpa          Float?
-  resumeUrl     String?       // optional resume upload later
-  createdAt     DateTime      @default(now())
-  applications  Application[] @relation("StudentApplications")  // one to many relationship with Application
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
+  password     String
+  branch       String?
+  year         Int?
+  cgpa         Float?
+  resumeUrl    String?
+  createdAt    DateTime      @default(now())
+  applications Application[] @relation("StudentApplications")
 
-  @@map("students")           // table name as students
+  @@map("students")
 }
 
 model Company {
-  id        Int      @id @default(autoincrement())
-  companyName      String
-  email     String    @unique
-  password  String
-  createdAt DateTime  @default(now())
-  jobs         Job[]  @relation("CompanyJobs") 
+  id          Int      @id @default(autoincrement())
+  companyName String
+  email       String   @unique
+  password    String
+  createdAt   DateTime @default(now())
+  jobs        Job[]    @relation("CompanyJobs")
 
   @@map("company")
 }
 
 model Job {
-  id             Int           @id @default(autoincrement())
-  title          String         //title of job
-  companyName    String         // company that posted the job
-  description    String?        // job description
-  eligibility    String?        
-  location       String?        // job location
-  salaryPackage  String?
-  postedAt       DateTime      @default(now())
-  postedById     Int
-  postedBy       Company       @relation("CompanyJobs", fields: [postedById], references: [id])
+  id            Int           @id @default(autoincrement())
+  title         String
+  companyName   String
+  description   String?
+  eligibility   String?
+  location      String?
+  salaryPackage String?
+  postedAt      DateTime      @default(now())
+  postedById    Int
+  applications  Application[] @relation("JobApplications")
+  postedBy      Company       @relation("CompanyJobs", fields: [postedById], references: [id])
 
-  applications   Application[] @relation("JobApplications")
-
+  @@index([postedById], map: "jobs_postedById_fkey")
   @@map("jobs")
 }
 
 model Application {
-  id          Int        @id @default(autoincrement())
-  studentId   Int
-  jobId       Int
-  appliedAt   DateTime   @default(now())
-  status      ApplicationStatus @default(PENDING)
+  id        Int               @id @default(autoincrement())
+  studentId Int
+  jobId     Int
+  appliedAt DateTime          @default(now())
+  status    ApplicationStatus @default(PENDING)
+  job       Job               @relation("JobApplications", fields: [jobId], references: [id])
+  student   Student           @relation("StudentApplications", fields: [studentId], references: [id])
 
-  student     Student            @relation("StudentApplications", fields: [studentId], references: [id]) 
-  job         Job                @relation("JobApplications", fields: [jobId], references: [id]) 
-
-
-  @@unique([studentId, jobId]) // a student can apply to a job only once
+  @@unique([studentId, jobId])
+  @@index([jobId], map: "applications_jobId_fkey")
   @@map("applications")
 }
 

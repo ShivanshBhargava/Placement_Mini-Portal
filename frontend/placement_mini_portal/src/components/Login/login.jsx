@@ -32,8 +32,12 @@ export default function Login() {
       // save token in localStorage
       localStorage.setItem("token", data.token);
 
-      // redirect user after login
-      window.location.href = "/dashboard"; 
+      // redirect based on user type
+      if (data.userType === "company") {
+        window.location.href = "/company-dashboard";
+      } else {
+        window.location.href = "/dashboard";
+      } 
     } catch (error) {
       console.error(error);
       setEmailError("Something went wrong");

@@ -1,98 +1,107 @@
 import dotenv from "dotenv"
 dotenv.config();
 import express from "express";
+import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import jobRoutes from "./routes/jobs.js";
 
 const app = express();
 const prisma = new PrismaClient();
 
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 app.use(express.json());
 
-// CORS for Express 5 (must NOT use "*")
+// Log all requests
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true");
-
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-
+  console.log(`${req.method} ${req.path}`, req.body);
   next();
 });
 
+// Routes
+app.use("/api/jobs", jobRoutes);
+
 // LOGIN ROUTE
 app.post("/Login", async (req, res) => {
-    // console.log(req);
   const { email, password } = req.body;
 
-  const student = await prisma.Student.findUnique({
-    where: { email },
-  });
+  // Check student first
+  let user = await prisma.Student.findUnique({ where: { email } });
+  let userType = "student";
 
-  if (!student) {
+  // If not student, check company
+  if (!user) {
+    user = await prisma.Company.findUnique({ where: { email } });
+    userType = "company";
+  }
+
+  if (!user) {
     return res.status(400).json({ error: "User not found" });
   }
 
-  const validPassword = await bcrypt.compare(password, student.password);
-
+  const validPassword = await bcrypt.compare(password, user.password);
   if (!validPassword) {
     return res.status(400).json({ error: "Invalid password" });
   }
 
   const token = jwt.sign(
     {
-      id: student.id,
-      email: student.email,
+      id: user.id,
+      email: user.email,
+      companyName: userType === "company" ? user.companyName : undefined,
+      userType
     },
     "MY_SECRET_KEY",
     { expiresIn: "30d" }
   );
 
-  return res.json({ message: "Login successful", token });
+  return res.json({ message: "Login successful", token, userType });
 });
 
 
 app.post("/Signup", async (req, res) => {
-  const { role, name, email, password } = req.body;
-    console.log(req.body)
-  if (!role || !name || !email || !password) {
-    return res.status(400).json({ error: "All fields are required" });
+  try {
+    const { role, name, email, password } = req.body;
+    console.log("Signup request:", { role, name, email });
+    
+    if (!role || !name || !email || !password) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    // Check if user exists in both tables
+    const existingStudent = await prisma.Student.findUnique({ where: { email } });
+    const existingCompany = await prisma.Company.findUnique({ where: { email } });
+    
+    if (existingStudent || existingCompany) {
+      return res.status(400).json({ error: "Email already registered" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    let newUser;
+
+    if (role === "student") {
+      newUser = await prisma.Student.create({
+        data: { name, email, password: hashedPassword }
+      });
+    } else if (role === "company") {
+      newUser = await prisma.Company.create({
+        data: { 
+          companyName: name,
+          email, 
+          password: hashedPassword 
+        }
+      });
+    }
+
+    return res.json({ message: "Signup successful", user: newUser });
+  } catch (error) {
+    console.error("Signup error:", error);
+    return res.status(500).json({ error: "Something went wrong" });
   }
-
-  // Check if user already exists
-  const existing = await prisma.Student.findUnique({ where: { email } });
-  if (existing) {
-    return res.status(400).json({ error: "Email already registered" });
-  }
-
-  // Hash password
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  let newUser;
-
-  if (role === "student") {
-    newUser = await prisma.Student.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword
-      }
-    });
-  } else if (role === "company") {
-    newUser = await prisma.Company.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword
-      }
-    });
-  }
-
-  return res.json({ message: "Signup successful", user: newUser });
 });
 
 

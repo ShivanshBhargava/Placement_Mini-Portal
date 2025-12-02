@@ -51,6 +51,7 @@ Update application status
 
 Project Structure
 Placement_Mini_Portal/
+
 │
 ├── frontend/     # React frontend
 └── backend/      # Node.js + Express + Prisma

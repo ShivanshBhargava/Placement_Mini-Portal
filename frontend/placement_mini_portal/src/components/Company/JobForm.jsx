@@ -6,7 +6,10 @@ export default function JobForm({ job, onJobCreated, onCancel }) {
     description: '',
     eligibility: '',
     location: '',
-    salaryPackage: ''
+    salaryPackage: '',
+    role: '',
+    applicationStart: '',
+    applicationEnd: ''
   });
 
   useEffect(() => {
@@ -16,7 +19,10 @@ export default function JobForm({ job, onJobCreated, onCancel }) {
         description: job.description || '',
         eligibility: job.eligibility || '',
         location: job.location || '',
-        salaryPackage: job.salaryPackage || ''
+        salaryPackage: job.salaryPackage || '',
+        role: job.role || '',
+        applicationStart: job.applicationStart ? job.applicationStart.slice(0, 16) : '',
+        applicationEnd: job.applicationEnd ? job.applicationEnd.slice(0, 16) : ''
       });
     }
   }, [job]);
@@ -48,7 +54,10 @@ export default function JobForm({ job, onJobCreated, onCancel }) {
           description: '',
           eligibility: '',
           location: '',
-          salaryPackage: ''
+          salaryPackage: '',
+          role: '',
+          applicationStart: '',
+          applicationEnd: ''
         });
       }
     } catch (error) {

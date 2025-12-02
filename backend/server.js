@@ -6,6 +6,7 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import jobRoutes from "./routes/jobs.js";
+import studentRoutes from "./routes/student.js";
 
 const app = express();
 const prisma = new PrismaClient();
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use("/api/jobs", jobRoutes);
+app.use("/api/student", studentRoutes);
 
 // LOGIN ROUTE
 app.post("/Login", async (req, res) => {

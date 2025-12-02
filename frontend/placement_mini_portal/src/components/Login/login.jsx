@@ -35,6 +35,8 @@ export default function Login() {
       // redirect based on user type
       if (data.userType === "company") {
         window.location.href = "/company-dashboard";
+      } else if (data.userType === "student") {
+        window.location.href = "/student-dashboard";
       } else {
         window.location.href = "/dashboard";
       } 

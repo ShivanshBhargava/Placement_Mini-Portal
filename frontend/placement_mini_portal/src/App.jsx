@@ -4,6 +4,7 @@ import Login from './components/Login/login';
 import { Routes, Route } from "react-router-dom"
 import { BrowserRouter } from "react-router-dom";
 import CompanyDashboard from './components/Company/CompanyDashboard';
+import StudentDashboard from './components/Student/StudentDashboard';
 
 import './App.css'
 import Signup from './components/Signup/Signup';
@@ -18,6 +19,7 @@ function App() {
             <Route path="/Login" element={<Login/>}></Route>
             <Route path="/Signup" element={<Signup/>}></Route>
             <Route path="/company-dashboard" element={<CompanyDashboard/>}></Route>
+            <Route path="/student-dashboard" element={<StudentDashboard/>}></Route>
         </Routes>
         </BrowserRouter>
   )

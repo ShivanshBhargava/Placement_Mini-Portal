@@ -41,12 +41,12 @@ export default function Login() {
       // Use context login function
       login(data.token, { token: data.token, role: data.userType });
 
-      // Redirect based on user type
+      // Redirect based on user type using client-side navigation
       // Using replace: true to prevent back button from going back to login
       if (data.userType === "company") {
-        window.location.href = "/company-dashboard";
+        navigate("/company-dashboard", { replace: true });
       } else if (data.userType === "student") {
-        window.location.href = "/student-dashboard";
+        navigate("/student-dashboard", { replace: true });
       } else {
         navigate("/dashboard", { replace: true });
       }

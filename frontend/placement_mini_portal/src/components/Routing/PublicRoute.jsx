@@ -3,10 +3,11 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const PublicRoute = () => {
-    const { token } = useAuth();
+    const { token, role } = useAuth();
 
     if (token) {
-        return <Navigate to="/company-dashboard" replace />;
+        const redirectPath = role === 'company' ? '/company-dashboard' : '/student-dashboard';
+        return <Navigate to={redirectPath} replace />;
     }
 
     return <Outlet />;

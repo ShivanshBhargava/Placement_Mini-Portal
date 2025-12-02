@@ -16,7 +16,7 @@ function AuthButtons() {
     <div className="auth-buttons">
       {token ? (
         <>
-          <button className="login-btn" onClick={() => navigate("/dashboard")}>Dashboard</button>
+          <button className="login-btn" onClick={() => navigate("/student-dashboard")}>Dashboard</button>
           <button className="signup-btn" onClick={handleLogout}>Logout</button>
         </>
       ) : (

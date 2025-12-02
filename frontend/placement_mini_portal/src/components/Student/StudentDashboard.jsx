@@ -3,12 +3,14 @@ import JobListings from './JobListings';
 import ApplicationStatus from './ApplicationStatus';
 import StudentProfile from './StudentProfile';
 import './StudentDashboard.css';
+import GooCursor from '../Cursor/GooCursor';
 
 export default function StudentDashboard() {
   const [activeTab, setActiveTab] = useState('profile');
 
   return (
     <div className="student-dashboard">
+      <GooCursor/>
       <h1>Student Dashboard</h1>
       
       <div className="dashboard-tabs">

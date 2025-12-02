@@ -11,25 +11,8 @@ import studentRoutes from "./routes/student.js";
 const app = express();
 const prisma = new PrismaClient();
 
-// CORS configuration to allow Vercel deployments
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:3000',
-  'https://placement-mini-portal-wwbu.vercel.app'
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, Postman, etc.)
-    if (!origin) return callback(null, true);
-
-    // Allow if origin is in allowedOrigins or matches Vercel pattern
-    if (allowedOrigins.includes(origin) || origin.includes('vercel.app')) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: '*',
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
@@ -41,6 +24,11 @@ app.use(express.urlencoded({ limit: '500mb', extended: true }));
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`, req.body);
   next();
+});
+
+// Root route
+app.get("/", (req, res) => {
+  res.send(`Congratulations Leapin backend working with current time: ${new Date().toLocaleString()}`);
 });
 
 // Routes

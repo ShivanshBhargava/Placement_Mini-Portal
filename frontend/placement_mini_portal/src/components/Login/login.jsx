@@ -39,7 +39,9 @@ export default function Login() {
       // Redirect based on user type
       // Using replace: true to prevent back button from going back to login
       if (data.userType === "company") {
-        navigate("/company-dashboard", { replace: true });
+        window.location.href = "/company-dashboard";
+      } else if (data.userType === "student") {
+        window.location.href = "/student-dashboard";
       } else {
         navigate("/dashboard", { replace: true });
       }
@@ -54,13 +56,11 @@ export default function Login() {
     <div className="login-page">
       <GooCursor />
 
-      {/* Background */}
       <div className="bg"></div>
 
       <div className="container">
         <div className="auth-card">
 
-          {/* CUTOUT MASK AREA */}
           <div className="auth-image">
             <svg width="0" height="0">
               <defs>

@@ -2,6 +2,8 @@ import Hero from './components/Landing_page/Hero';
 import Login from './components/Login/login';
 import { Routes, Route } from "react-router-dom"
 import { BrowserRouter } from "react-router-dom";
+import CompanyDashboard from './components/Company/CompanyDashboard';
+import StudentDashboard from './components/Student/StudentDashboard';
 
 import './App.css'
 import Signup from './components/Signup/Signup';
@@ -25,6 +27,7 @@ function App() {
 
           {/* Protected Routes - only accessible if logged in */}
           {/* <Route element={<ProtectedRoute />}>
+            <Route path="/student-dashboard" element={<StudentDashboard/>}></Route>
             <Route path="/company-dashboard" element={<CompanyDashboard />}></Route>
           </Route> */}
         </Routes>

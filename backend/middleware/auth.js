@@ -8,7 +8,7 @@ export const authenticate = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "MY_SECRET_KEY");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
@@ -24,7 +24,7 @@ export const authenticateStudent = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "MY_SECRET_KEY");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (decoded.userType !== 'student') {
       return res.status(403).json({ error: "Access denied. Students only." });
     }
@@ -43,7 +43,7 @@ export const authenticateCompany = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "MY_SECRET_KEY");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (decoded.userType !== 'company') {
       return res.status(403).json({ error: "Access denied. Companies only." });
     }

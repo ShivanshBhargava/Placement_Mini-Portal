@@ -12,8 +12,10 @@ const app = express();
 const prisma = new PrismaClient();
 
 app.use(cors({
-  origin: "*",
-  credentials: true
+  origin: process.env.FRONTEND_URL || "https://placement-mini-portal-wwbu.vercel.app",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 app.use(express.json({ limit: '500mb' }));
 app.use(express.urlencoded({ limit: '500mb', extended: true }));
@@ -113,6 +115,23 @@ app.post("/Signup", async (req, res) => {
 
 // Start Server
 const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+});
+
+// Graceful shutdown
+process.on('SIGTERM', async () => {
+  console.log('SIGTERM signal received: closing HTTP server');
+  await prisma.$disconnect();
+  server.close(() => {
+    console.log('HTTP server closed');
+  });
+});
+
+process.on('SIGINT', async () => {
+  console.log('SIGINT signal received: closing HTTP server');
+  await prisma.$disconnect();
+  server.close(() => {
+    console.log('HTTP server closed');
+  });
 });

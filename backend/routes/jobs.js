@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 // Create job opening
 router.post("/", authenticateCompany, async (req, res) => {
   const { title, description, eligibility, location, salaryPackage } = req.body;
-  
+
   try {
     const job = await prisma.job.create({
       data: {
@@ -40,15 +40,36 @@ router.get("/", authenticateCompany, async (req, res) => {
   }
 });
 
+// Get single job by ID
+router.get("/:id", authenticateCompany, async (req, res) => {
+  try {
+    const job = await prisma.job.findFirst({
+      where: {
+        id: parseInt(req.params.id),
+        postedById: req.company.id
+      },
+      include: { applications: true }
+    });
+
+    if (!job) {
+      return res.status(404).json({ error: "Job not found" });
+    }
+
+    res.json(job);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch job" });
+  }
+});
+
 // Update job
 router.put("/:id", authenticateCompany, async (req, res) => {
   const { title, description, eligibility, location, salaryPackage } = req.body;
-  
+
   try {
     const job = await prisma.job.update({
-      where: { 
+      where: {
         id: parseInt(req.params.id),
-        postedById: req.company.id 
+        postedById: req.company.id
       },
       data: { title, description, eligibility, location, salaryPackage }
     });
@@ -63,14 +84,14 @@ router.delete("/:id", authenticateCompany, async (req, res) => {
   try {
     const jobId = parseInt(req.params.id);
     console.log(`Attempting to delete job ${jobId} for company ${req.company.id}`);
-    
+
     const deletedJob = await prisma.job.delete({
-      where: { 
+      where: {
         id: jobId,
-        postedById: req.company.id 
+        postedById: req.company.id
       }
     });
-    
+
     console.log('Job deleted successfully:', deletedJob);
     res.json({ message: "Job deleted successfully" });
   } catch (error) {
@@ -83,7 +104,7 @@ router.delete("/:id", authenticateCompany, async (req, res) => {
 router.get("/:id/applications", authenticateCompany, async (req, res) => {
   try {
     const applications = await prisma.application.findMany({
-      where: { 
+      where: {
         jobId: parseInt(req.params.id),
         job: { postedById: req.company.id }
       },

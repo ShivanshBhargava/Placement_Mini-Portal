@@ -57,8 +57,8 @@ model Application {
   jobId     Int
   appliedAt DateTime          @default(now())
   status    ApplicationStatus @default(PENDING)
-  job       Job               @relation("JobApplications", fields: [jobId], references: [id])
-  student   Student           @relation("StudentApplications", fields: [studentId], references: [id])
+  job       Job               @relation("JobApplications", fields: [jobId], references: [id], onDelete: Cascade)
+  student   Student           @relation("StudentApplications", fields: [studentId], references: [id], onDelete: Cascade)
 
   @@unique([studentId, jobId])
   @@index([jobId], map: "applications_jobId_fkey")

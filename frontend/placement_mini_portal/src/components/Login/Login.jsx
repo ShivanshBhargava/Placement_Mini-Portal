@@ -3,6 +3,7 @@ import "./login.css";
 import GooCursor from "../Cursor/GooCursor";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import apiFetch, { API_BASE, buildUrl } from "../../config/api";
 
 export default function Login() {
   const [emailError, setEmailError] = useState("");
@@ -18,13 +19,11 @@ export default function Login() {
     const password = formData.get("password");
 
     console.log('Login attempt:', { email });
-    console.log('API URL:', import.meta.env.VITE_API_URL);
+    console.log('API_BASE:', API_BASE);
 
     try {
-      const url = `${import.meta.env.VITE_API_URL}/Login`;
-      console.log('Sending request to:', url);
-
-      const response = await fetch(url, {
+      console.log('Sending request to:', buildUrl('/Login'));
+      const response = await apiFetch('/Login', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

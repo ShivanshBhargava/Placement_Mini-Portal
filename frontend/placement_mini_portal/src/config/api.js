@@ -1,82 +1,69 @@
-const API_URL = import.meta.env.VITE_API_URL;
+// Centralized API helper with fallbacks for deployed environments
+const VITE_API_URL = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env.VITE_API_URL : undefined;
 
-// Log the API URL on initialization (helps debug deployment issues)
-console.log('API Base URL:', API_URL);
+function detectRuntimeBase() {
+    if (typeof window === 'undefined') return '';
+    if (window.__API_URL) return window.__API_URL;
+    const origin = window.location.origin || '';
+    // If running on Vercel and backend is deployed as serverless functions, assume '/api' prefix
+    if (origin.includes('vercel.app')) return origin + '/api';
+    return origin;
+}
 
-const getHeaders = () => {
-    const token = localStorage.getItem("token");
-    return {
-        "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    };
-};
+export const API_BASE = VITE_API_URL || (typeof window !== 'undefined' ? detectRuntimeBase() : '');
 
-const api = {
-    get: async (endpoint) => {
-        const url = `${API_URL}${endpoint}`;
-        console.log('GET:', url);
+export function buildUrl(path) {
+    if (!path) return API_BASE || '';
+    if (/^https?:\/\//i.test(path)) return path;
+    const sep = path.startsWith('/') ? '' : '/';
+    return `${API_BASE}${sep}${path}`;
+}
 
-        const response = await fetch(url, {
-            method: "GET",
-            headers: getHeaders(),
-        });
+function getAuthHeaders(additional = {}) {
+    const headers = { 'Content-Type': 'application/json', ...additional };
+    if (typeof window !== 'undefined') {
+        const token = localStorage.getItem('token');
+        if (token) headers.Authorization = `Bearer ${token}`;
+    }
+    return headers;
+}
 
-        if (!response.ok) {
-            const error = await response.json().catch(() => ({ error: 'Request failed' }));
-            throw new Error(error.error || "Something went wrong");
-        }
-        return response.json();
-    },
+export async function apiFetch(path, options = {}) {
+    const url = buildUrl(path);
+    const fetchOptions = { ...options };
+    if (!fetchOptions.headers) fetchOptions.headers = {};
+    return fetch(url, fetchOptions);
+}
 
-    post: async (endpoint, data) => {
-        const url = `${API_URL}${endpoint}`;
-        console.log('POST:', url, data);
+async function handleResponse(res) {
+    const text = await res.text();
+    let json;
+    try { json = text ? JSON.parse(text) : {}; } catch (e) { json = { message: text }; }
+    if (!res.ok) {
+        const err = (json && (json.error || json.message)) || `Request failed with status ${res.status}`;
+        throw new Error(err);
+    }
+    return json;
+}
 
-        const response = await fetch(url, {
-            method: "POST",
-            headers: getHeaders(),
-            body: JSON.stringify(data),
-        });
+export async function get(endpoint) {
+    const res = await apiFetch(endpoint, { method: 'GET', headers: getAuthHeaders() });
+    return handleResponse(res);
+}
 
-        const result = await response.json().catch(() => ({ error: 'Invalid response' }));
-        if (!response.ok) {
-            throw new Error(result.error || "Something went wrong");
-        }
-        return result;
-    },
+export async function post(endpoint, data) {
+    const res = await apiFetch(endpoint, { method: 'POST', headers: getAuthHeaders(), body: JSON.stringify(data) });
+    return handleResponse(res);
+}
 
-    put: async (endpoint, data) => {
-        const url = `${API_URL}${endpoint}`;
-        console.log('PUT:', url, data);
+export async function put(endpoint, data) {
+    const res = await apiFetch(endpoint, { method: 'PUT', headers: getAuthHeaders(), body: JSON.stringify(data) });
+    return handleResponse(res);
+}
 
-        const response = await fetch(url, {
-            method: "PUT",
-            headers: getHeaders(),
-            body: JSON.stringify(data),
-        });
+export async function del(endpoint) {
+    const res = await apiFetch(endpoint, { method: 'DELETE', headers: getAuthHeaders() });
+    return handleResponse(res);
+}
 
-        const result = await response.json().catch(() => ({ error: 'Invalid response' }));
-        if (!response.ok) {
-            throw new Error(result.error || "Something went wrong");
-        }
-        return result;
-    },
-
-    delete: async (endpoint) => {
-        const url = `${API_URL}${endpoint}`;
-        console.log('DELETE:', url);
-
-        const response = await fetch(url, {
-            method: "DELETE",
-            headers: getHeaders(),
-        });
-
-        const result = await response.json().catch(() => ({ error: 'Invalid response' }));
-        if (!response.ok) {
-            throw new Error(result.error || "Something went wrong");
-        }
-        return result;
-    },
-};
-
-export default api;
+export default apiFetch;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./signup.css";
 import GooCursor from "../Cursor/GooCursor";
+import apiFetch, { API_BASE, buildUrl } from "../../config/api";
 
 export default function Signup() {
   const [role, setRole] = useState("student"); // <-- NEW
@@ -19,13 +20,11 @@ export default function Signup() {
     const password = formData.get("password");
 
     console.log('Signup attempt:', { role, name, email });
-    console.log('API URL:', import.meta.env.VITE_API_URL);
+    console.log('API_BASE:', API_BASE);
 
     try {
-      const url = `${import.meta.env.VITE_API_URL}/Signup`;
-      console.log('Sending request to:', url);
-
-      const response = await fetch(url, {
+      console.log('Sending request to:', buildUrl('/Signup'));
+      const response = await apiFetch('/Signup', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role, name, email, password }),

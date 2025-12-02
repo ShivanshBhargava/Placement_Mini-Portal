@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import apiFetch, { API_BASE, buildUrl } from '../../config/api';
 import './StudentProfile.css';
 
 export default function StudentProfile() {
@@ -29,7 +30,8 @@ export default function StudentProfile() {
   const fetchProfile = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/profile`, {
+      console.log('Fetching profile from:', buildUrl('/api/student/profile'));
+      const response = await apiFetch('/api/student/profile', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
@@ -61,7 +63,7 @@ export default function StudentProfile() {
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/profile`, {
+      const response = await apiFetch('/api/student/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -182,7 +184,7 @@ export default function StudentProfile() {
         profileImage: profile.profileImage
       };
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/profile`, {
+      const response = await apiFetch('/api/student/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

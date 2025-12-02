@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { get, post, API_BASE, buildUrl } from '../../config/api';
 
 export default function JobListings() {
   const [jobs, setJobs] = useState([]);
@@ -13,16 +14,8 @@ export default function JobListings() {
 
   const fetchJobs = async () => {
     try {
-      const token = localStorage.getItem('token');
-      console.log('Token:', token);
-      console.log('Fetching jobs from:', `${import.meta.env.VITE_API_URL}/api/student/jobs`);
-
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/jobs`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-
-      console.log('Response status:', response.status);
-      const data = await response.json();
+      console.log('Fetching jobs from:', buildUrl('/api/student/jobs'));
+      const data = await get('/api/student/jobs');
       console.log('Jobs data:', data);
       setJobs(data);
       setFilteredJobs(data);
@@ -35,18 +28,12 @@ export default function JobListings() {
 
   const applyForJob = async (jobId) => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/jobs/${jobId}/apply`, {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-
-      if (response.ok) {
+      try {
+        await post(`/api/student/jobs/${jobId}/apply`);
         alert('Application submitted successfully!');
         fetchJobs(); // Refresh jobs to update application status
-      } else {
-        const error = await response.json();
-        alert(error.error || 'Failed to apply');
+      } catch (err) {
+        alert(err.message || 'Failed to apply');
       }
     } catch (error) {
       console.error('Failed to apply:', error);

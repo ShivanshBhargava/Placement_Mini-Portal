@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import "./login.css";
 import GooCursor from "../Cursor/GooCursor";
 import Signup from "../Signup/Signup";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [passwordError] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,20 +33,21 @@ export default function Login() {
         return;
       }
 
-      // save token in localStorage
-      localStorage.setItem("token", data.token);
+      // Use context login function
+      login(data.token, { token: data.token, role: data.userType });
 
-      // redirect based on user type
+      // Redirect based on user type
+      // Using replace: true to prevent back button from going back to login
       if (data.userType === "company") {
-        window.location.href = "/company-dashboard";
+        navigate("/company-dashboard", { replace: true });
       } else {
-        window.location.href = "/dashboard";
-      } 
+        navigate("/dashboard", { replace: true });
+      }
     } catch (error) {
       console.error(error);
       setEmailError("Something went wrong");
     }
-};
+  };
 
 
   return (

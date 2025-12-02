@@ -1,5 +1,5 @@
 import Hero from './components/Landing_page/Hero';
-import Login from './components/Login/login';
+import Login from './components/Login/Login';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CompanyDashboard from './components/Company/CompanyDashboard';
 import StudentDashboard from './components/Student/StudentDashboard';

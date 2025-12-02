@@ -1,11 +1,11 @@
 import Hero from './components/Landing_page/Hero';
-import Login from './components/Login/Login';
+import Login from './components/Login/login';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CompanyDashboard from './components/Company/CompanyDashboard';
 import StudentDashboard from './components/Student/StudentDashboard';
 
 import './App.css';
-import Signup from './components/Signup/Signup.jsx';
+import Signup from './components/Signup/signup';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/Routing/ProtectedRoute';
 import PublicRoute from './components/Routing/PublicRoute';

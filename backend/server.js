@@ -59,7 +59,7 @@ app.post("/Login", async (req, res) => {
       companyName: userType === "company" ? user.companyName : undefined,
       userType
     },
-    "MY_SECRET_KEY",
+    process.env.JWT_SECRET,
     { expiresIn: "30d" }
   );
 
@@ -112,6 +112,7 @@ app.post("/Signup", async (req, res) => {
 
 
 // Start Server
-app.listen(5001, () => {
-  console.log("Server running on http://localhost:5001");
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

@@ -11,7 +11,7 @@ export default function CompanyDashboard() {
   const fetchJobs = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5001/api/jobs', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/jobs`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -40,19 +40,19 @@ export default function CompanyDashboard() {
     if (!confirm('Are you sure you want to delete this job?')) {
       return;
     }
-    
+
     try {
       const token = localStorage.getItem('token');
       console.log('Deleting job ID:', jobId);
       console.log('Token:', token);
-      
-      const response = await fetch(`http://localhost:5001/api/jobs/${jobId}`, {
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/jobs/${jobId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      
+
       console.log('Delete response status:', response.status);
-      
+
       if (response.ok) {
         // Remove job from state immediately
         setJobs(jobs.filter(job => job.id !== jobId));
@@ -71,7 +71,7 @@ export default function CompanyDashboard() {
   return (
     <div className="company-dashboard">
       <h1>Company Dashboard</h1>
-      
+
       <div className="dashboard-actions">
         <button onClick={() => setShowForm(!showForm)}>
           {showForm ? 'Cancel' : 'Create New Job'}
@@ -79,8 +79,8 @@ export default function CompanyDashboard() {
       </div>
 
       {showForm && (
-        <JobForm 
-          job={editingJob} 
+        <JobForm
+          job={editingJob}
           onJobCreated={handleJobCreated}
           onCancel={() => {
             setShowForm(false);
@@ -89,8 +89,8 @@ export default function CompanyDashboard() {
         />
       )}
 
-      <JobList 
-        jobs={jobs} 
+      <JobList
+        jobs={jobs}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

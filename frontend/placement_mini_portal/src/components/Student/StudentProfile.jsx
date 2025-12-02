@@ -29,10 +29,10 @@ export default function StudentProfile() {
   const fetchProfile = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5001/api/student/profile', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      
+
       if (response.ok) {
         const data = await response.json();
         setProfile(data);
@@ -60,8 +60,8 @@ export default function StudentProfile() {
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      
-      const response = await fetch('http://localhost:5001/api/student/profile', {
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ export default function StudentProfile() {
         },
         body: JSON.stringify({ profileImage: imageData })
       });
-      
+
       if (response.ok) {
         console.log('Profile image saved successfully');
       }
@@ -82,18 +82,18 @@ export default function StudentProfile() {
     const file = e.target.files[0];
     if (file) {
       if (file.type.startsWith('image/')) {
-        
+
         const reader = new FileReader();
         reader.onload = (e) => {
           const img = new Image();
           img.onload = () => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
-            
+
             // Resize image to max 300x300
             const maxSize = 300;
             let { width, height } = img;
-            
+
             if (width > height) {
               if (width > maxSize) {
                 height = (height * maxSize) / width;
@@ -105,13 +105,13 @@ export default function StudentProfile() {
                 height = maxSize;
               }
             }
-            
+
             canvas.width = width;
             canvas.height = height;
-            
+
             ctx.drawImage(img, 0, 0, width, height);
             const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-            
+
             setImagePreview(compressedBase64);
             setProfile(prev => {
               const updatedProfile = {
@@ -137,7 +137,7 @@ export default function StudentProfile() {
     if (file) {
       const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
       if (allowedTypes.includes(file.type)) {
-        
+
         const reader = new FileReader();
         reader.onload = (e) => {
           const base64 = e.target.result;
@@ -158,14 +158,14 @@ export default function StudentProfile() {
     setSaving(true);
     try {
       const token = localStorage.getItem('token');
-      
+
       if (!token) {
         alert('Please login again');
         return;
       }
-      
+
       console.log('Saving profile:', profile);
-      
+
       // Send all profile fields including image
       const profileData = {
         name: profile.name,
@@ -181,8 +181,8 @@ export default function StudentProfile() {
         resumeName: profile.resumeName,
         profileImage: profile.profileImage
       };
-      
-      const response = await fetch('http://localhost:5001/api/student/profile', {
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -192,7 +192,7 @@ export default function StudentProfile() {
       });
 
       console.log('Response status:', response.status);
-      
+
       if (response.ok) {
         const result = await response.json();
         alert('Profile saved successfully!');
@@ -226,7 +226,7 @@ export default function StudentProfile() {
       <div className="profile-header">
         <div className="profile-title">
           <h2>My Profile</h2>
-          <button 
+          <button
             onClick={() => setEditing(!editing)}
             className="edit-toggle-btn"
           >
@@ -380,8 +380,8 @@ export default function StudentProfile() {
               <div className="file-info">
                 <span className="file-name">📄 {profile.resumeName}</span>
                 {profile.resumeUrl && (
-                  <a 
-                    href={profile.resumeUrl} 
+                  <a
+                    href={profile.resumeUrl}
                     download={profile.resumeName}
                     className="download-link"
                   >
@@ -423,8 +423,8 @@ export default function StudentProfile() {
         {/* Save Button - Only show in edit mode */}
         {editing && (
           <div className="profile-actions">
-            <button 
-              onClick={handleSave} 
+            <button
+              onClick={handleSave}
               disabled={saving}
               className="save-btn"
             >

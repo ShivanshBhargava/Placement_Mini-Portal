@@ -18,7 +18,7 @@ export default function Login() {
     const password = formData.get("password");
 
     try {
-      const response = await fetch("http://localhost:5001/Login", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/Login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

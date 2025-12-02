@@ -29,15 +29,15 @@ export default function JobForm({ job, onJobCreated, onCancel }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const token = localStorage.getItem('token');
-      const url = job 
-        ? `http://localhost:5001/api/jobs/${job.id}`
-        : 'http://localhost:5001/api/jobs';
-      
+      const url = job
+        ? `${import.meta.env.VITE_API_URL}/api/jobs/${job.id}`
+        : `${import.meta.env.VITE_API_URL}/api/jobs`;
+
       const method = job ? 'PUT' : 'POST';
-      
+
       const response = await fetch(url, {
         method,
         headers: {

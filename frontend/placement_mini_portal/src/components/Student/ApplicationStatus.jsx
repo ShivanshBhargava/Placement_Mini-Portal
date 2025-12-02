@@ -7,7 +7,7 @@ export default function ApplicationStatus() {
   const fetchApplications = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5001/api/student/applications', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/applications`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -38,7 +38,7 @@ export default function ApplicationStatus() {
   return (
     <div className="application-status">
       <h2>My Applications</h2>
-      
+
       {applications.length === 0 ? (
         <p>You haven't applied to any jobs yet.</p>
       ) : (
@@ -49,11 +49,11 @@ export default function ApplicationStatus() {
               <p><strong>Company:</strong> {application.job.postedBy.companyName}</p>
               <p><strong>Location:</strong> {application.job.location}</p>
               <p><strong>Applied On:</strong> {new Date(application.appliedAt).toLocaleDateString()}</p>
-              
+
               <div className="status-badge">
-                <span 
+                <span
                   className="status"
-                  style={{ 
+                  style={{
                     backgroundColor: getStatusColor(application.status),
                     color: 'white',
                     padding: '4px 8px',

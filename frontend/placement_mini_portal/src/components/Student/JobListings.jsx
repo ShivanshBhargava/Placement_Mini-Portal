@@ -15,12 +15,12 @@ export default function JobListings() {
     try {
       const token = localStorage.getItem('token');
       console.log('Token:', token);
-      console.log('Fetching jobs from:', 'http://localhost:5001/api/student/jobs');
-      
-      const response = await fetch('http://localhost:5001/api/student/jobs', {
+      console.log('Fetching jobs from:', `${import.meta.env.VITE_API_URL}/api/student/jobs`);
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/jobs`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      
+
       console.log('Response status:', response.status);
       const data = await response.json();
       console.log('Jobs data:', data);
@@ -36,11 +36,11 @@ export default function JobListings() {
   const applyForJob = async (jobId) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5001/api/student/jobs/${jobId}/apply`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/jobs/${jobId}/apply`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      
+
       if (response.ok) {
         alert('Application submitted successfully!');
         fetchJobs(); // Refresh jobs to update application status
@@ -56,16 +56,16 @@ export default function JobListings() {
 
   const applyFilters = () => {
     let filtered = jobs.filter(job => {
-      const matchesCompany = !filters.company || 
+      const matchesCompany = !filters.company ||
         job.companyName.toLowerCase().includes(filters.company.toLowerCase());
-      
-      const matchesLocation = !filters.location || 
+
+      const matchesLocation = !filters.location ||
         job.location?.toLowerCase().includes(filters.location.toLowerCase());
-      
+
       const salary = job.salaryPackage ? parseFloat(job.salaryPackage.replace(/[^\d.]/g, '')) : 0;
       const matchesMinSalary = !filters.minSalary || salary >= parseFloat(filters.minSalary);
       const matchesMaxSalary = !filters.maxSalary || salary <= parseFloat(filters.maxSalary);
-      
+
       return matchesCompany && matchesLocation && matchesMinSalary && matchesMaxSalary;
     });
     setFilteredJobs(filtered);
@@ -93,7 +93,7 @@ export default function JobListings() {
   return (
     <div className="job-listings">
       <h2>Available Job Opportunities</h2>
-      
+
       <div className="filters-section">
         <h3>Filter Jobs</h3>
         <div className="filters-grid">
@@ -106,7 +106,7 @@ export default function JobListings() {
               onChange={(e) => handleFilterChange('company', e.target.value)}
             />
           </div>
-          
+
           <div className="filter-group">
             <label>Location</label>
             <input
@@ -116,7 +116,7 @@ export default function JobListings() {
               onChange={(e) => handleFilterChange('location', e.target.value)}
             />
           </div>
-          
+
           <div className="filter-group">
             <label>Min Salary (LPA)</label>
             <input
@@ -126,7 +126,7 @@ export default function JobListings() {
               onChange={(e) => handleFilterChange('minSalary', e.target.value)}
             />
           </div>
-          
+
           <div className="filter-group">
             <label>Max Salary (LPA)</label>
             <input
@@ -136,7 +136,7 @@ export default function JobListings() {
               onChange={(e) => handleFilterChange('maxSalary', e.target.value)}
             />
           </div>
-          
+
           <div className="filter-actions">
             <button onClick={clearFilters} className="clear-btn">
               Clear Filters
@@ -159,14 +159,14 @@ export default function JobListings() {
               {job.description && (
                 <p><strong>Description:</strong> {job.description}</p>
               )}
-              
+
               <div className="job-actions">
                 {job.applications.length > 0 ? (
                   <span className="applied-status">
                     Applied - Status: {job.applications[0].status}
                   </span>
                 ) : (
-                  <button 
+                  <button
                     onClick={() => applyForJob(job.id)}
                     className="apply-btn"
                   >

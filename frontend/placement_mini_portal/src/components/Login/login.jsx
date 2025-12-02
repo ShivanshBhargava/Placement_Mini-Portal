@@ -20,7 +20,7 @@ export default function Login() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      console.log(response)
+      // console.log(response)
 
       const data = await response.json();
 
@@ -51,13 +51,11 @@ export default function Login() {
     <div className="login-page">
       <GooCursor />
 
-      {/* Background */}
       <div className="bg"></div>
 
       <div className="container">
         <div className="auth-card">
 
-          {/* CUTOUT MASK AREA */}
           <div className="auth-image">
             <svg width="0" height="0">
               <defs>

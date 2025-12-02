@@ -11,9 +11,6 @@ export const AuthProvider = ({ children }) => {
         const storedToken = localStorage.getItem('token');
         if (storedToken) {
             setToken(storedToken);
-            // In a real app, you might validate the token with the backend here
-            // For now, we'll assume if a token exists, the user is logged in
-            // You might also want to store user details in localStorage or decode the token
             setUser({ token: storedToken });
         }
         setLoading(false);

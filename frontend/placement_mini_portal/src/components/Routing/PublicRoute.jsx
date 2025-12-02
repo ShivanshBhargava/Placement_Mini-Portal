@@ -6,9 +6,7 @@ const PublicRoute = () => {
     const { token } = useAuth();
 
     if (token) {
-        // Redirect to dashboard if already logged in
-        // You might want to differentiate between student and company dashboards here if you have that info
-        return <Navigate to="/dashboard" replace />;
+        return <Navigate to="/company-dashboard" replace />;
     }
 
     return <Outlet />;

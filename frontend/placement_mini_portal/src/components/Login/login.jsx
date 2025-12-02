@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
 import GooCursor from "../Cursor/GooCursor";
-import Signup from "../Signup/Signup";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -24,9 +23,10 @@ export default function Login() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      console.log(response)
 
       const data = await response.json();
+
+      console.log(data, "data")
 
       if (!response.ok) {
         setEmailError(data.error || "Login failed");
@@ -44,7 +44,7 @@ export default function Login() {
         navigate("/dashboard", { replace: true });
       }
     } catch (error) {
-      console.error(error);
+      console.log(error);
       setEmailError("Something went wrong");
     }
   };

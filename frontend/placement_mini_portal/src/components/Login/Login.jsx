@@ -3,7 +3,6 @@ import "./login.css";
 import GooCursor from "../Cursor/GooCursor";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import apiFetch, { API_BASE, buildUrl } from "../../config/api";
 
 export default function Login() {
   const [emailError, setEmailError] = useState("");
@@ -19,11 +18,13 @@ export default function Login() {
     const password = formData.get("password");
 
     console.log('Login attempt:', { email });
-    console.log('API_BASE:', API_BASE);
+    console.log('API URL:', import.meta.env.VITE_API_URL);
 
     try {
-      console.log('Sending request to:', buildUrl('/Login'));
-      const response = await apiFetch('/Login', {
+      const url = `${import.meta.env.VITE_API_URL}/Login`;
+      console.log('Sending request to:', url);
+
+      const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -41,12 +42,12 @@ export default function Login() {
       // Use context login function
       login(data.token, { token: data.token, role: data.userType });
 
-      // Redirect based on user type using client-side navigation
+      // Redirect based on user type
       // Using replace: true to prevent back button from going back to login
       if (data.userType === "company") {
-        navigate("/company-dashboard", { replace: true });
+        window.location.href = "/company-dashboard";
       } else if (data.userType === "student") {
-        navigate("/student-dashboard", { replace: true });
+        window.location.href = "/student-dashboard";
       } else {
         navigate("/dashboard", { replace: true });
       }

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { get, API_BASE, buildUrl } from '../../config/api';
 
 export default function ApplicationStatus() {
   const [applications, setApplications] = useState([]);
@@ -7,8 +6,11 @@ export default function ApplicationStatus() {
 
   const fetchApplications = async () => {
     try {
-      console.log('Fetching applications from:', buildUrl('/api/student/applications'));
-      const data = await get('/api/student/applications');
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/student/applications`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const data = await response.json();
       setApplications(data);
     } catch (error) {
       console.error('Failed to fetch applications:', error);

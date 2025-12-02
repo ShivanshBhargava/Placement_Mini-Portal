@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import apiFetch, { API_BASE, buildUrl } from '../../config/api';
 
 export default function JobForm({ job, onJobCreated, onCancel }) {
   const [formData, setFormData] = useState({
@@ -33,11 +32,13 @@ export default function JobForm({ job, onJobCreated, onCancel }) {
 
     try {
       const token = localStorage.getItem('token');
-      const urlPath = job ? `/api/jobs/${job.id}` : '/api/jobs';
+      const url = job
+        ? `${import.meta.env.VITE_API_URL}/api/jobs/${job.id}`
+        : `${import.meta.env.VITE_API_URL}/api/jobs`;
 
       const method = job ? 'PUT' : 'POST';
 
-      const response = await apiFetch(urlPath, {
+      const response = await fetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',

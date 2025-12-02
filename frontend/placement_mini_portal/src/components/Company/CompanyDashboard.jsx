@@ -37,15 +37,34 @@ export default function CompanyDashboard() {
   };
 
   const handleDelete = async (jobId) => {
+    if (!confirm('Are you sure you want to delete this job?')) {
+      return;
+    }
+    
     try {
       const token = localStorage.getItem('token');
-      await fetch(`http://localhost:5001/api/jobs/${jobId}`, {
+      console.log('Deleting job ID:', jobId);
+      console.log('Token:', token);
+      
+      const response = await fetch(`http://localhost:5001/api/jobs/${jobId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      fetchJobs();
+      
+      console.log('Delete response status:', response.status);
+      
+      if (response.ok) {
+        // Remove job from state immediately
+        setJobs(jobs.filter(job => job.id !== jobId));
+        alert('Job deleted successfully!');
+      } else {
+        const error = await response.json();
+        console.error('Delete error response:', error);
+        alert(error.error || 'Failed to delete job');
+      }
     } catch (error) {
-      console.error('Failed to delete job:', error);
+      console.error('Delete request failed:', error);
+      alert('Failed to delete job');
     }
   };
 

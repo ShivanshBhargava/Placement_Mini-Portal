@@ -61,15 +61,21 @@ router.put("/:id", authenticateCompany, async (req, res) => {
 // Delete job
 router.delete("/:id", authenticateCompany, async (req, res) => {
   try {
-    await prisma.job.delete({
+    const jobId = parseInt(req.params.id);
+    console.log(`Attempting to delete job ${jobId} for company ${req.company.id}`);
+    
+    const deletedJob = await prisma.job.delete({
       where: { 
-        id: parseInt(req.params.id),
+        id: jobId,
         postedById: req.company.id 
       }
     });
+    
+    console.log('Job deleted successfully:', deletedJob);
     res.json({ message: "Job deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: "Failed to delete job" });
+    console.error("Delete error:", error);
+    res.status(500).json({ error: "Failed to delete job: " + error.message });
   }
 });
 

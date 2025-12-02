@@ -17,16 +17,22 @@ export default function Login() {
     const email = formData.get("email");
     const password = formData.get("password");
 
+    console.log('Login attempt:', { email });
+    console.log('API URL:', import.meta.env.VITE_API_URL);
+
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/Login`, {
+      const url = `${import.meta.env.VITE_API_URL}/Login`;
+      console.log('Sending request to:', url);
+
+      const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
+      console.log('Response status:', response.status);
       const data = await response.json();
-
-      console.log(data, "data")
+      console.log('Response data:', data);
 
       if (!response.ok) {
         setEmailError(data.error || "Login failed");
@@ -46,8 +52,8 @@ export default function Login() {
         navigate("/dashboard", { replace: true });
       }
     } catch (error) {
-      console.log(error);
-      setEmailError("Something went wrong");
+      console.error('Login error:', error);
+      setEmailError("Something went wrong: " + error.message);
     }
   };
 

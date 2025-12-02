@@ -14,19 +14,26 @@ export default function Signup() {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    console.log(formData);
     const name = formData.get("name");
     const email = formData.get("email");
     const password = formData.get("password");
 
+    console.log('Signup attempt:', { role, name, email });
+    console.log('API URL:', import.meta.env.VITE_API_URL);
+
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/Signup`, {
+      const url = `${import.meta.env.VITE_API_URL}/Signup`;
+      console.log('Sending request to:', url);
+
+      const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role, name, email, password }),
       });
 
+      console.log('Response status:', response.status);
       const data = await response.json();
+      console.log('Response data:', data);
 
       if (!response.ok) {
         setNameError(data.error || "Signup failed");
@@ -37,8 +44,8 @@ export default function Signup() {
       navigate("/login");
 
     } catch (error) {
-      console.error(error);
-      setEmailError("Something went wrong");
+      console.error('Signup error:', error);
+      setEmailError("Something went wrong: " + error.message);
     }
   };
 

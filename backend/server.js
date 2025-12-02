@@ -11,8 +11,25 @@ import studentRoutes from "./routes/student.js";
 const app = express();
 const prisma = new PrismaClient();
 
+// CORS configuration to allow Vercel deployments
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://placement-mini-portal-wwbu.vercel.app'
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "https://placement-mini-portal-wwbu.vercel.app",
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+
+    // Allow if origin is in allowedOrigins or matches Vercel pattern
+    if (allowedOrigins.includes(origin) || origin.includes('vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]

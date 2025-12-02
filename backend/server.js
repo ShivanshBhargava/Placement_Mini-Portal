@@ -29,12 +29,13 @@ app.use("/api/student", studentRoutes);
 
 // LOGIN ROUTE
 app.post("/Login", async (req, res) => {
+
+  console.log(req.body, "req.body");
   const { email, password } = req.body;
 
   // Check student first
   let user = await prisma.Student.findUnique({ where: { email } });
   let userType = "student";
-
   // If not student, check company
   if (!user) {
     user = await prisma.Company.findUnique({ where: { email } });
@@ -69,7 +70,7 @@ app.post("/Signup", async (req, res) => {
   try {
     const { role, name, email, password } = req.body;
     console.log("Signup request:", { role, name, email });
-    
+
     if (!role || !name || !email || !password) {
       return res.status(400).json({ error: "All fields are required" });
     }
@@ -77,7 +78,7 @@ app.post("/Signup", async (req, res) => {
     // Check if user exists in both tables
     const existingStudent = await prisma.Student.findUnique({ where: { email } });
     const existingCompany = await prisma.Company.findUnique({ where: { email } });
-    
+
     if (existingStudent || existingCompany) {
       return res.status(400).json({ error: "Email already registered" });
     }
@@ -91,10 +92,10 @@ app.post("/Signup", async (req, res) => {
       });
     } else if (role === "company") {
       newUser = await prisma.Company.create({
-        data: { 
+        data: {
           companyName: name,
-          email, 
-          password: hashedPassword 
+          email,
+          password: hashedPassword
         }
       });
     }

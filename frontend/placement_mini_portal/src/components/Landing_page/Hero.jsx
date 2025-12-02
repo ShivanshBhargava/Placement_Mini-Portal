@@ -8,16 +8,15 @@ import LightRays from "../Background/LightRays.jsx";
 import GooCursor from "../Cursor/GooCursor.jsx";
 import TextonLanding from "./Text.jsx";
 import FlipText from "./Rotating.jsx";
-import { useState, useEffect, useRef } from "react";
 
 
 function Hero() {
-  
+
   return (
     <div className="blackbg">
-      <GooCursor style={{height:"0px"}}/>
+      <GooCursor style={{ height: "0px" }} />
       <motion.div
-       initial={{
+        initial={{
           opacity: 0,
           filter: "blur(3vw)",
         }}
@@ -69,7 +68,7 @@ function Hero() {
         <div className="hero-center">
 
           {/* LOGO */}
-        <motion.img
+          <motion.img
             className="hero-logo"
             src={logo}
             initial={{ clipPath: "inset(0 100% 0 0)" }}
@@ -98,7 +97,7 @@ function Hero() {
               bounce: 0.3,
             }}
           />
-          <TextonLanding/>
+          <TextonLanding />
           <motion.div
             style={{
               position: "absolute",
@@ -117,13 +116,13 @@ function Hero() {
             transition={{ delay: 1.5, duration: 1, ease: "easeOut" }}
           >
             {/* ITEM 1 */}
-            <div style={{ textAlign:"right" }}>
+            <div style={{ textAlign: "right" }}>
               <h1
                 style={{
                   color: "#beb7b7ff",
                   fontFamily: "Anton",
                   fontSize: "2.2vw",
-                  margin:"0"
+                  margin: "0"
                 }}
               >
                 01
@@ -140,7 +139,7 @@ function Hero() {
             </div>
 
             {/* ITEM 2 */}
-            <div style={{ textAlign:"right" }}>
+            <div style={{ textAlign: "right" }}>
               <h1
                 style={{
                   color: "#beb7b7ff",
@@ -163,7 +162,7 @@ function Hero() {
             </div>
 
             {/* ITEM 3 */}
-            <div style={{ textAlign:"right" }}>
+            <div style={{ textAlign: "right" }}>
               <h1
                 style={{
                   color: "#beb7b7ff",
@@ -186,7 +185,7 @@ function Hero() {
             </div>
 
             {/* ITEM 4 */}
-            <div style={{ textAlign:"right" }}>
+            <div style={{ textAlign: "right" }}>
               <h1
                 style={{
                   color: "#beb7b7ff",
@@ -244,9 +243,9 @@ function Hero() {
               <span className="scroll-text">Scroll</span>
             </a>
           </section>
-        </motion.div>    
-        
-      
+        </motion.div>
+
+
       </div>
       <motion.div
         className="blue-line"

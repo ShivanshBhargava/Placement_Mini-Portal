@@ -18,6 +18,7 @@ model Student {
   resumeUrl    String?
   createdAt    DateTime      @default(now())
   applications Application[] @relation("StudentApplications")
+  attendance   Attendance[]
 
   @@map("students")
 }
@@ -69,4 +70,26 @@ enum ApplicationStatus {
   SHORTLISTED
   SELECTED
   REJECTED
+}
+
+model Subject {
+  id          Int          @id @default(autoincrement())
+  name        String
+  code        String?
+  credits     Int?
+  attendances Attendance[]
+  @@map("subjects")
+}
+
+model Attendance {
+  id        Int     @id @default(autoincrement())
+  studentId Int
+  subjectId Int
+  total     Int     @default(0)
+  attended  Int     @default(0)
+  student   Student @relation(fields: [studentId], references: [id])
+  subject   Subject @relation(fields: [subjectId], references: [id])
+
+  @@unique([studentId, subjectId])
+  @@map("attendance")
 }

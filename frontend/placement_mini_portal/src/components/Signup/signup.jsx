@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./signup.css";
 import GooCursor from "../Cursor/GooCursor";
 
@@ -6,12 +7,14 @@ export default function Signup() {
   const [role, setRole] = useState("student"); // <-- NEW
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [passwordError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
+    console.log(formData);
     const name = formData.get("name");
     const email = formData.get("email");
     const password = formData.get("password");
@@ -31,7 +34,7 @@ export default function Signup() {
       }
 
       alert("Signup successful!");
-      window.location.href = "/login";
+      navigate("/login");
 
     } catch (error) {
       console.error(error);
@@ -58,7 +61,7 @@ export default function Signup() {
 
             {/* ---------------- ROLE SELECTION ---------------- */}
             <div className="role-select-container2">
-              {role === "" ? <h3>Select Account Type</h3>:<></>}
+              {role === "" ? <h3>Select Account Type</h3> : <></>}
 
               <div className="role-options2">
 

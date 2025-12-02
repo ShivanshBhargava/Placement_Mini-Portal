@@ -5,7 +5,7 @@ import CompanyDashboard from './components/Company/CompanyDashboard';
 import StudentDashboard from './components/Student/StudentDashboard';
 
 import './App.css';
-import Signup from './components/Signup/signup';
+import Signup from './components/Signup/Signup';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/Routing/ProtectedRoute';
 import PublicRoute from './components/Routing/PublicRoute';

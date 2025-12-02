@@ -26,10 +26,10 @@ function App() {
           </Route>
 
           {/* Protected Routes - only accessible if logged in */}
-          /* <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute />}>
             <Route path="/student-dashboard" element={<StudentDashboard />}></Route>
             <Route path="/company-dashboard" element={<CompanyDashboard />}></Route>
-          </Route> */
+          </Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

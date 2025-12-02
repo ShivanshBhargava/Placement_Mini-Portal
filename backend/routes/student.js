@@ -88,4 +88,105 @@ router.get("/applications", authenticateStudent, async (req, res) => {
   }
 });
 
+// Get student profile
+router.get("/profile", authenticateStudent, async (req, res) => {
+  try {
+    const student = await prisma.student.findUnique({
+      where: { id: req.student.id },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        branch: true,
+        college: true,
+        university: true,
+        passingYear: true,
+        cgpa: true,
+        percentage: true,
+        bio: true,
+        goals: true,
+        resumeUrl: true,
+        resumeName: true,
+        profileImage: true
+      }
+    });
+    
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+    
+    res.json(student);
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    res.status(500).json({ error: "Failed to fetch profile" });
+  }
+});
+
+// Update student profile
+router.put("/profile", authenticateStudent, async (req, res) => {
+  try {
+    console.log('Updating profile for student:', req.student.id);
+    console.log('Received data:', req.body);
+    
+    const {
+      name,
+      branch,
+      college,
+      university,
+      passingYear,
+      cgpa,
+      percentage,
+      bio,
+      goals,
+      resumeUrl,
+      resumeName,
+      profileImage
+    } = req.body;
+    
+    console.log('Extracted fields:', {
+      name, branch, college, university, passingYear, cgpa, percentage, bio, goals, resumeName
+    });
+
+    const updatedStudent = await prisma.student.update({
+      where: { id: req.student.id },
+      data: {
+        name: name || undefined,
+        branch: branch || undefined,
+        college: college || undefined,
+        university: university || undefined,
+        passingYear: passingYear && passingYear !== '' ? parseInt(passingYear) : undefined,
+        cgpa: cgpa && cgpa !== '' ? parseFloat(cgpa) : undefined,
+        percentage: percentage && percentage !== '' ? parseFloat(percentage) : undefined,
+        bio: bio || undefined,
+        goals: goals || undefined,
+        resumeUrl: resumeUrl || undefined,
+        resumeName: resumeName || undefined,
+        profileImage: profileImage || undefined
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        branch: true,
+        college: true,
+        university: true,
+        passingYear: true,
+        cgpa: true,
+        percentage: true,
+        bio: true,
+        goals: true,
+        resumeUrl: true,
+        resumeName: true,
+        profileImage: true
+      }
+    });
+
+    console.log('Profile updated successfully');
+    res.json({ message: "Profile updated successfully", student: updatedStudent });
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ error: "Failed to update profile: " + error.message });
+  }
+});
+
 export default router;

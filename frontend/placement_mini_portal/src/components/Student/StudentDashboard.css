@@ -6,22 +6,32 @@
 
 .dashboard-tabs {
   display: flex;
-  gap: 10px;
+  gap: 5px;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
 }
 
 .dashboard-tabs button {
-  padding: 10px 20px;
+  padding: 12px 20px;
   border: none;
-  background: none;
+  background: #f8f9fa;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
+  border-radius: 8px 8px 0 0;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  color: #6c757d;
+}
+
+.dashboard-tabs button:hover {
+  background: #e9ecef;
+  color: #495057;
 }
 
 .dashboard-tabs button.active {
-  border-bottom-color: #007bff;
-  color: #007bff;
+  background: #007bff;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
 }
 
 .jobs-grid {

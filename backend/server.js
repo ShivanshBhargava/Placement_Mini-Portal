@@ -12,7 +12,7 @@ const app = express();
 const prisma = new PrismaClient();
 
 app.use(cors({
-  origin: true,
+  origin: "*",
   credentials: true
 }));
 app.use(express.json({ limit: '500mb' }));
